@@ -1,0 +1,31 @@
+/* ---- colors-rofi.rasi ---- */
+/* Paleta cálida a juego con waybar (generada a mano, mismo acento que el
+   wallpaper: naranja quemado / marrón cuero / negro).
+   Si en algún momento corrés `wallust run <wallpaper>`, esto se
+   sobreescribe automáticamente con los colores reales extraídos de la
+   imagen — este archivo es el punto de partida / fallback. */
+
+* {
+	background:          #000000;
+	background-color:    #000000;
+	background-alt:      #7a3a20;
+	foreground:          #ede0d0;
+	active-background:   #4a3221;
+
+	color0:  #0d0805;
+	color1:  #7a3a20;
+	color2:  #5c3a26;
+	color3:  #8a6b45;
+	color4:  #4a2c17;
+	color5:  #7a3020;
+	color6:  #6b5030;
+	color7:  #a89680;
+	color8:  #4a3221;
+	color9:  #e2542a;
+	color10: #c9703a;
+	color11: #e2833f;
+	color12: #c9703a;
+	color13: #d9b382;
+	color14: #e2833f;
+	color15: #ede0d0;
+}

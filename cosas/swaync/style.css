@@ -1,0 +1,183 @@
+/* SwayNC — a juego con el tema pink de waybar */
+
+* {
+	font-family: "JetBrainsMono Nerd Font";
+	font-size: 14px;
+}
+
+.control-center {
+	background-color: rgba(20, 16, 20, 0.85);
+	border-radius: 24px;
+	border: 2px solid rgba(186, 86, 99, 0.5);
+	padding: 12px;
+}
+
+.notification-row {
+	background: transparent;
+	padding: 4px 0;
+}
+
+.notification-background {
+	background-color: rgba(35, 28, 35, 0.9);
+	border-radius: 16px;
+	border: 1px solid rgba(186, 86, 99, 0.6);
+	padding: 6px;
+}
+
+.notification {
+	border-radius: 14px;
+}
+
+.notification-content {
+	color: whitesmoke;
+}
+
+.close-button {
+	background-color: rgba(186, 86, 99, 0.7);
+	color: whitesmoke;
+	border-radius: 50%;
+	min-width: 22px;
+	min-height: 22px;
+}
+
+.close-button:hover {
+	background-color: #ba5663;
+}
+
+/* ---- Título / Clear All ---- */
+.widget-title {
+	color: whitesmoke;
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 6px;
+}
+
+.widget-title > button {
+	background-color: rgba(186, 86, 99, 0.55);
+	color: whitesmoke;
+	border-radius: 14px;
+	padding: 4px 14px;
+	border: none;
+}
+
+.widget-title > button:hover {
+	background-color: #ba5663;
+}
+
+/* ---- Do Not Disturb ---- */
+.widget-dnd {
+	color: whitesmoke;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+.widget-dnd > switch {
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+.widget-dnd > switch:checked {
+	background-color: #ff6f91;
+}
+
+.widget-dnd > switch slider {
+	border-radius: 50%;
+	background-color: whitesmoke;
+}
+
+/* ---- Botones rápidos (power, lock, airplane, mute, bluetooth) ---- */
+.widget-buttons-grid {
+	margin-bottom: 8px;
+}
+
+.widget-buttons-grid > flowboxchild > button {
+	background-color: rgba(186, 86, 99, 0.35);
+	color: #ff6f91;
+	border-radius: 16px;
+	min-width: 46px;
+	min-height: 46px;
+	font-size: 18px;
+	border: 1px solid rgba(186, 86, 99, 0.4);
+	margin: 3px;
+	transition: all 0.15s ease-in-out;
+}
+
+.widget-buttons-grid > flowboxchild > button:hover {
+	background-color: #ba5663;
+	color: whitesmoke;
+}
+
+/* ---- Reproductor de música (mpris) ---- */
+.widget-mpris {
+	background-color: rgba(35, 28, 35, 0.85);
+	border-radius: 18px;
+	border: 1px solid rgba(186, 86, 99, 0.5);
+	padding: 10px;
+	margin-bottom: 8px;
+}
+
+.widget-mpris-player {
+	padding: 4px;
+}
+
+.widget-mpris-title {
+	color: whitesmoke;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.widget-mpris-subtitle {
+	color: #d9a3ac;
+	font-size: 12px;
+}
+
+.widget-mpris > box > button {
+	background: transparent;
+	color: whitesmoke;
+	border-radius: 50%;
+	min-width: 30px;
+	min-height: 30px;
+}
+
+.widget-mpris > box > button:hover {
+	background-color: rgba(186, 86, 99, 0.4);
+}
+
+/* ---- Slider de volumen ---- */
+.widget-volume {
+	background-color: rgba(35, 28, 35, 0.85);
+	border-radius: 16px;
+	border: 1px solid rgba(186, 86, 99, 0.5);
+	padding: 10px;
+	margin-bottom: 8px;
+	color: #ff6f91;
+}
+
+.widget-volume > box > slider {
+	background-color: whitesmoke;
+	border-radius: 50%;
+	min-width: 16px;
+	min-height: 16px;
+}
+
+.widget-volume > box > trough {
+	min-height: 8px;
+	border-radius: 8px;
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+.widget-volume > box > trough > highlight {
+	min-height: 8px;
+	border-radius: 8px;
+	background-color: #ff6f91;
+}
+
+/* Sliders de volumen por app (cuando show-per-app está activo) */
+.per-app-volume slider {
+	background-color: whitesmoke;
+	border-radius: 50%;
+}
+
+.per-app-volume trough > highlight {
+	background-color: #ff6f91;
+}
