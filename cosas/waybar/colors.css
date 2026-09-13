@@ -1,8 +1,0 @@
-/* Valores iniciales (mismo naranja quemado de antes) — matugen los va a
-   sobreescribir la primera vez que corras `matugen image <wallpaper>` */
-@define-color background #000000;
-@define-color foreground #ede0d0;
-@define-color accent #c9703a;
-@define-color accent-bright #e2833f;
-@define-color border #4a3221;
-@define-color alert #e2542a;
