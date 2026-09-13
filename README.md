@@ -1,4 +1,4 @@
-# evangelio-dot
+# evangelion-dot
 this is my dotfile based retroboxed
 
 
