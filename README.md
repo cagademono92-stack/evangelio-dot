@@ -11,3 +11,6 @@ bash curl -sSL https://raw.githubusercontent.com/cagademono92-stack/evangelio-do
 
 
 <img width="1277" height="719" alt="imagen" src="https://github.com/user-attachments/assets/4ec39ce6-302c-4f4d-a9e3-9b514219c7dd" />
+
+
+<img width="1279" height="719" alt="imagen" src="https://github.com/user-attachments/assets/65eebb35-1bf3-41db-9100-44c9abe522a0" />
