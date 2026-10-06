@@ -5,7 +5,10 @@ this is my dotfile based retroboxed
 #installation 
 bash cd cosas git init git add . git commit -m "dots iniciales" git branch -M main git remote add origin https://github.com/cagademono92-stack/evangelio-dot.git git push -u origin main
 #comand for installation
-git clone 
+git clone https://github.com/cagademono92-stack/evangelio-dot.git
+cd evangelio-dot
+chmod +x install.sh
+./install.sh
 
 
 <img width="1279" height="719" alt="imagen" src="https://github.com/user-attachments/assets/602b09aa-db94-45e4-b53b-cc280a2a053e" />
