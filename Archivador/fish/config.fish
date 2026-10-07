@@ -3,8 +3,6 @@ if status is-interactive
     starship init fish | source
 end
 
-# opencode
-fish_add_path /home/receck/.opencode/bin
 
 # Recarga en vivo de los colores: apply-theme.sh manda SIGUSR1 a los shells
 # interactivos cuando cambia el wallpaper, y aquí re-sourcéamos la paleta que
