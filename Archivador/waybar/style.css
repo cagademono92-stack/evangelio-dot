@@ -1,22 +1,28 @@
-/* ----------- 🟦 https://github.com/JaKooLit 🟦 -------- */
-/* [Top] Azulejos — cada módulo es un azulejo cuadrado con su propio fondo,
-   separados por huecos, estilo mosaico plano con esquinas suaves.
-   Usa el config "[TOP] Segmentado". */
-
-/* Colores dinámicos del wallpaper (generado por matugen) */
-@import "colors.css";
+/* ----------- 🟩 https://github.com/JaKooLit 🟩 -------- */
+/* [TOP] Matrix Code — barra superior estilo Matrix/terminal: fondo negro
+   profundo, texto verde fósforo (#00ff41) y escaner sutil. Los módulos se
+   "ejecutan" como comandos; workspaces como prompts >_.
+   Usa el config "[TOP] Matrix Code". */
 
 * {
 	font-family: "JetBrainsMono Nerd Font";
-	font-weight: bold;
+	font-weight: 500;
 	min-height: 0;
-	font-size: 93%;
+	font-size: 92%;
 	font-feature-settings: '"zero", "ss01", "ss02", "ss03"';
 }
 
 window#waybar {
 	background: transparent;
-	color: @foreground;
+	color: #00ff41;
+}
+
+window#waybar.top {
+	background: rgba(3, 12, 6, 0.94);
+	border-radius: 14px;
+	border: 1px solid #008f11;
+	box-shadow: 0 0 24px rgba(0, 255, 65, 0.18),
+	            inset 0 0 30px rgba(0, 255, 65, 0.05);
 }
 
 window#waybar.hidden {
@@ -24,22 +30,22 @@ window#waybar.hidden {
 }
 
 tooltip {
-	background: #16181f;
-	border-radius: 12px;
-	border: 1px solid @border;
-	color: @accent-bright;
+	background: #021006;
+	border-radius: 10px;
+	border: 1px solid #008f11;
+	color: #00ff41;
+	box-shadow: 0 0 14px rgba(0, 255, 65, 0.2);
 }
 
-/* ---- grupos transparentes: los azulejos viven en cada módulo ---- */
+/* ---- contenedores ---- */
 .modules-left,
 .modules-center,
 .modules-right {
 	background: transparent;
-	padding: 4px;
-	margin: 0 2px;
+	padding: 2px 6px;
 }
 
-/* ---- cada módulo = un azulejo ---- */
+/* ---- módulos: texto de terminal ---- */
 #custom-menu,
 #clock,
 #custom-weather,
@@ -56,104 +62,109 @@ tooltip {
 #pulseaudio,
 #battery,
 #custom-power {
-	padding: 6px 10px;
-	margin: 0 3px;
+	padding: 4px 10px;
+	margin: 0 1px;
 	border-radius: 10px;
-	background: @background;
-	border: 1px solid @border;
-	color: @foreground;
-	transition: all 0.25s ease;
+	color: #00ff41;
+	transition: all 0.2s ease;
 }
 
-#custom-menu,
-#clock,
-#custom-weather,
-#cpu,
-#memory,
-#custom-themes,
-#tray,
-#custom-swaync,
-#mpris,
-#network,
-#bluetooth,
-#backlight,
-#custom-display,
-#pulseaudio,
-#battery,
+#custom-menu:hover,
+#clock:hover,
+#custom-weather:hover,
+#cpu:hover,
+#memory:hover,
+#custom-themes:hover,
+#custom-swaync:hover,
+#mpris:hover,
+#network:hover,
+#bluetooth:hover,
+#backlight:hover,
+#custom-display:hover,
+#pulseaudio:hover,
+#battery:hover,
 #custom-power:hover {
-	border: 1px solid @accent;
-	color: @accent-bright;
+	background: rgba(0, 255, 65, 0.08);
+	color: #c8ff85;
+	text-shadow: 0 0 8px #00ff41;
 }
 
 #custom-menu {
-	background: @accent;
-	color: @background;
-	border: 1px solid @accent;
+	background: #00ff41;
+	color: #021006;
 	font-size: 105%;
+	box-shadow: 0 0 16px #00ff41;
 }
 
 #custom-menu:hover {
-	background: @accent-bright;
-	color: @background;
+	color: #021006;
+	background: #c8ff85;
+	box-shadow: 0 0 16px #c8ff85;
+	text-shadow: none;
 }
 
-/* ---- workspaces: azulejo activo relleno de acento ---- */
-#taskbar button,
+#clock {
+	color: #c8ff85;
+}
+
+#custom-power {
+	color: #ff5b5b;
+}
+
+/* ---- workspaces: prompts de "root@matrix" ---- */
 #workspaces button {
-	padding: 6px 10px;
-	margin: 0 3px;
+	min-height: 20px;
+	min-width: 20px;
+	margin: 2px 3px;
+	padding: 0 8px;
 	border-radius: 10px;
-	background: @background;
-	border: 1px solid @border;
-	color: @accent-bright;
+	color: #008f11;
+	background: transparent;
 	box-shadow: none;
 	text-shadow: none;
-	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+	transition: all 0.2s ease;
 }
 
-#taskbar button.active,
+
 #workspaces button.active {
-	background: @accent;
-	color: @background;
-	border: 1px solid @accent;
+	color: #021006;
+	background: #00ff41;
+	box-shadow: 0 0 12px #00ff41;
 }
 
 #workspaces button.focused {
-	color: @accent-bright;
+	color: #c8ff85;
 }
 
 #workspaces button.urgent {
-	color: @alert;
-	border: 1px solid @alert;
-	animation: blink 2s steps(4) infinite;
+	color: #ff5b5b;
+	animation: blink 1.5s steps(2) infinite;
 }
 
-#taskbar button:hover,
 #workspaces button:hover {
-	border: 1px solid @accent;
-	color: @accent-bright;
+	background: rgba(0, 255, 65, 0.14);
+	color: #00ff41;
+	border-radius: 10px;
 }
 
 /* ---- estados / alertas ---- */
 #battery.critical:not(.charging) {
-	color: @alert;
-	border: 1px solid @alert;
+	color: #ff5b5b;
 }
 
 #pulseaudio.muted,
 #pulseaudio.microphone.muted {
-	color: @alert;
-	border: 1px solid @alert;
+	color: #ff5b5b;
 }
 
 #custom-hypridle.notactive,
 #idle_inhibitor.activated {
-	color: #39FF14;
+	color: #c8ff85;
 }
 
 @keyframes blink {
 	to {
-		color: @background;
+		color: #021006;
 	}
 }
 /* Temperatura CPU/GPU — módulos añadidos a todos los themes */
