@@ -72,6 +72,9 @@ EXTRA_PKGS=(
 	fuzzel
 	conky
 	eww
+	# Fuentes usadas por waybar/rofi/kitty/eww/conky
+	ttf-jetbrains-mono-nerd
+	noto-fonts-emoji
 )
 
 echo "Principales:  ${CORE_PKGS[*]}"
