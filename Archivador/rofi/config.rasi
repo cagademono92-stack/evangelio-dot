@@ -31,8 +31,8 @@
 //@theme "~/.config/rofi/themes/KooL_style-5.rasi"
 //@theme "~/.config/rofi/themes/KooL_style-5.rasi"
 
-//@theme "/home/receck/.config/rofi/themes/centered-simple-tokyonight.rasi"
+//@theme "$HOME/.config/rofi/themes/centered-simple-tokyonight.rasi"
 
-//@theme "/home/receck/.local/share/rofi/themes/KooL_style-5.rasi"
+//@theme "$HOME/.local/share/rofi/themes/KooL_style-5.rasi"
 
-@theme "/home/receck/.config/rofi/themes/theme-azulejos.rasi"
+@theme "$HOME/.config/rofi/themes/theme-azulejos.rasi"

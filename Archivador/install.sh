@@ -175,18 +175,18 @@ done
 # ("/home/receck/..."). Si instalás esto en otra máquina o con otro usuario,
 # esas rutas no existen. Las reescribimos al $HOME real de quien instala.
 if [ -f "$CONFIG_DIR/waypaper/config.ini" ]; then
-	sed -i "s|/home/[^/]*/\.config|$HOME/.config|g; s|/home/[^/]*|$HOME|g" "$CONFIG_DIR/waypaper/config.ini"
+	sed -i "s|$HOME/\.config|$HOME/.config|g; s|/home/[^/]*|$HOME|g" "$CONFIG_DIR/waypaper/config.ini"
 	echo "Ajustado: rutas de usuario en waypaper/config.ini -> $HOME"
 fi
 
 # fish/config.fish puede traer rutas viejas tipo /home/receck/...
 if [ -f "$CONFIG_DIR/fish/config.fish" ]; then
-	sed -i "s|/home/[^/]*/|$HOME/|g" "$CONFIG_DIR/fish/config.fish"
+	sed -i "s|$HOME/|$HOME/|g" "$CONFIG_DIR/fish/config.fish"
 	echo "Ajustado: rutas de usuario en fish/config.fish -> $HOME"
 fi
 
 # Rutas absolutas en hyprpaper.conf / hyprlock apuntan al usuario original
-for f in "$CONFIG_DIR/hypr/hyprpaper.conf" "$CONFIG_DIR/hypr/hyprlock/colors.conf"; do
+for f in "$CONFIG_DIR/hypr/hyprpaper.conf" "$CONFIG_DIR/hypr/hyprlock/colors.conf" "$CONFIG_DIR/rofi/config.rasi"; do
 	if [ -f "$f" ]; then
 		sed -i "s|/home/[^/]*|$HOME|g" "$f"
 		echo "Ajustado: rutas de usuario en $(basename "$f") -> $HOME"
