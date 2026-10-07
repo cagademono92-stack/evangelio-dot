@@ -25,7 +25,17 @@ cd Archivador && ./install.sh
 
 O si prefieres, descarga el `Archivador.zip` del último release, descomprímelo y ejecuta `install.sh` dentro.
 
+## Instalación automática
+
+`Archivador/install.sh` hace todo esto solo:
+
+- Instala `yay` si no lo tienes
+- Instala paquetes **oficiales** con `pacman` (waybar, rofi, swaync, fish, kitty, cava, conky, eww, easyeffects, portales, etc.)
+- Instala paquetes de **AUR** con `yay` (matugen, waypaper, gpu-screen-recorder, hyprpolkitagent, y la fuente JetBrainsMono Nerd)
+- Hace backup de tu `~/.config` viejo y copia la configuración nueva
+
 ## Uso
+
 
 - `waypaper` para cambiar el wallpaper → recolorea todo solo
 - Botón en waybar para ocultar/mostrar el conky
