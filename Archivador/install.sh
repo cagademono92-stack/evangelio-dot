@@ -72,6 +72,17 @@ EXTRA_PKGS=(
 	fuzzel
 	conky
 	eww
+	wl-clipboard
+	wtype
+	tesseract
+	bc
+	xdg-user-dirs
+	easyeffects
+	gnome-keyring
+	gpu-screen-recorder
+	xdg-desktop-portal
+	xdg-desktop-portal-hyprland
+	hyprpolkitagent
 	# Fuentes usadas por waybar/rofi/kitty/eww/conky
 	ttf-jetbrains-mono-nerd
 	noto-fonts-emoji
