@@ -1,0 +1,205 @@
+/* ----------- 🖥️ https://github.com/JaKooLit 🖥️ -------- */
+/* [BOTTOM] macOS Dock — muelle inferior estilo macOS: superficie oscura
+   translúcida tipo "frosted glass", brillo superior y separadores finos
+   entre módulos como en la barra de menús. Usa "[BOTTOM] macOS Dock". */
+
+/* Colores dinámicos del wallpaper (generado por matugen) */
+@import "colors.css";
+
+* {
+	font-family: "JetBrainsMono Nerd Font";
+	font-weight: 500;
+	min-height: 0;
+	font-size: 90%;
+	font-feature-settings: '"zero", "ss01", "ss02", "ss03"';
+}
+
+window#waybar {
+	background: transparent;
+	color: @foreground;
+}
+
+window#waybar.bottom {
+	background: rgba(28, 30, 36, 0.62);
+	border-radius: 26px;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	box-shadow: 0 14px 48px rgba(0, 0, 0, 0.45),
+	            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+window#waybar.hidden {
+	opacity: 0.5;
+}
+
+tooltip {
+	background: rgba(24, 26, 30, 0.95);
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	color: @accent-bright;
+}
+
+/* ---- contenedores dentro de la cápsula ---- */
+.modules-left,
+.modules-center,
+.modules-right {
+	background: transparent;
+	padding: 2px 6px;
+}
+
+/* ---- módulos: separadores finos "menu bar" ---- */
+#custom-menu,
+#clock,
+#custom-weather,
+#cpu,
+#memory,
+#custom-themes,
+#tray,
+#custom-swaync,
+#mpris,
+#network,
+#bluetooth,
+#backlight,
+#custom-display,
+#pulseaudio,
+#battery,
+#custom-power,
+#group-bgapps {
+	padding: 4px 14px;
+	margin: 6px 0;
+	border-left: 1px solid rgba(255, 255, 255, 0.08);
+	color: rgba(235, 238, 245, 0.9);
+	transition: all 0.2s ease;
+}
+
+#custom-menu {
+	border-left: none;
+	color: @background;
+	background: transparent;
+}
+
+#custom-menu:hover,
+#clock:hover,
+#custom-weather:hover,
+#cpu:hover,
+#memory:hover,
+#custom-themes:hover,
+#custom-swaync:hover,
+#mpris:hover,
+#network:hover,
+#bluetooth:hover,
+#backlight:hover,
+#custom-display:hover,
+#pulseaudio:hover,
+#battery:hover,
+#custom-power:hover,
+#group-bgapps:hover {
+	color: @foreground;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 12px;
+}
+
+#custom-menu:hover {
+	background: transparent;
+	border-radius: 0;
+}
+
+#custom-power {
+	border-right: none;
+}
+
+/* ---- workspaces: píldoras tipo "spaces" de macOS ---- */
+#workspaces button {
+	min-height: 20px;
+	min-width: 20px;
+	margin: 2px 4px;
+	padding: 0 7px;
+	border-radius: 999px;
+	color: rgba(210, 215, 225, 0.85);
+	background: rgba(255, 255, 255, 0.06);
+	box-shadow: none;
+	text-shadow: none;
+	transition: all 0.25s ease;
+}
+
+#workspaces button.active {
+	background: @accent;
+	color: @background;
+	box-shadow: 0 2px 10px alpha(@accent, 0.5);
+}
+
+#workspaces button.focused {
+	color: @accent-bright;
+}
+
+#workspaces button.urgent {
+	color: @alert;
+	animation: blink 2s steps(4) infinite;
+}
+
+#taskbar button:hover,
+#workspaces button:hover {
+	background: rgba(255, 255, 255, 0.16);
+	color: @background;
+	border-radius: 999px;
+	font-weight: bold;
+}
+
+/* ---- estados / alertas ---- */
+#battery.critical:not(.charging) {
+	color: @alert;
+}
+
+#pulseaudio.muted,
+#pulseaudio.microphone.muted {
+	color: @alert;
+}
+
+#custom-hypridle.notactive,
+#idle_inhibitor.activated {
+	color: #39FF14;
+}
+
+@keyframes blink {
+	to {
+		color: @background;
+	}
+}
+/* Temperatura CPU/GPU — módulos añadidos a todos los themes */
+#temperature#cpu,
+#custom-gpu_temp,
+#custom-gpu_temp.gpu {
+	padding: 4px 8px;
+	border-radius: 18px;
+	color: @foreground;
+}
+#temperature#cpu.critical {
+	color: @alert;
+}
+#custom-gpu_temp.hidden {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
+}
+
+/* ---- Slots vacíos del drawer de apps ocultas (bgapps.sh) ----
+   Cuando un slot no tiene ninguna app, bgapps.sh manda "text":"" — sin esto
+   el botón igual se dibuja como un cuadrado vacío con su padding/fondo. */
+#custom-bgapp1.empty,
+#custom-bgapp2.empty,
+#custom-bgapp3.empty,
+#custom-bgapp4.empty,
+#custom-bgapp5.empty,
+#custom-bgapp6.empty,
+#custom-bgapp7.empty,
+#custom-bgapp8.empty {
+	min-width: 0;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: transparent;
+	opacity: 0;
+}

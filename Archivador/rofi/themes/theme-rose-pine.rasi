@@ -1,0 +1,33 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "rose-pine" — basado en la config principal de rofi (KooL_style-5) */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"
+
+/* ---- Paleta "rose-pine" ---- */
+* {
+	background:            #191724;
+	background-color:      #191724;
+	background-alt:        #1f1d2e;
+	foreground:            #e0def4;
+	selected:              #c4a7e7;
+	active:                #eb6f92;
+	text-selected:         #191724;
+	urgent:                #eb6f92;
+
+	color0:  #191724;
+	color1:  #1f1d2e;
+	color2:  #c4a7e7;
+	color3:  #eb6f92;
+	color4:  #c4a7e7;
+	color5:  #eb6f92;
+	color6:  #1f1d2e;
+	color7:  #e0def4;
+	color8:  #26233a;
+	color9:  #eb6f92;
+	color10: #c4a7e7;
+	color11: #eb6f92;
+	color12: #c4a7e7;
+	color13: #c4a7e7;
+	color14: #eb6f92;
+	color15: #e0def4;
+}

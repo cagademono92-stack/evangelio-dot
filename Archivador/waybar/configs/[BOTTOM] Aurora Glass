@@ -1,0 +1,47 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+// ### [BOTTOM] Aurora Glass ### //
+// Dock inferior estilo "glassmorphism": cristal translúcido frío con glow
+// aurora (acento) en los workspaces y "cristales" al hacer hover.
+
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules",
+  ],
+"layer": "top",
+"position": "bottom",
+"width": 1240,
+"margin-bottom": 10,
+
+"modules-left": [
+	"custom/menu",
+	"group/bgapps",
+	"clock",
+	"custom/weather",
+	"cpu",
+	"memory",
+	"temperature#cpu",
+	"custom/gpu_temp",
+	],
+
+"modules-center": [
+	"hyprland/workspaces#roman"
+	],
+
+"modules-right": [
+	"custom/themes",
+	"tray",
+	"group/notify",
+	"mpris",
+	"network",
+	"bluetooth",
+	"backlight",
+	"custom/display",
+	"pulseaudio",
+	"battery",
+	"custom/power"],
+}

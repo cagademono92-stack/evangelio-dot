@@ -1,0 +1,236 @@
+/* ---- 🟦 https://github.com/JaKooLit 🟦 ---- */
+/* Tema "azulejos" — launcher tipo mosaico de azulejos cuadrados, igual que la
+   barra [Top] Azulejos. Cada elemento es un azulejo con su propio fondo y
+   huecos entre ellos. */
+
+/* ---- Load wallust colors (dinámicos según wallpaper) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Mapeo semántico al wallpaper (el resto lo define colors-rofi.rasi) ---- */
+* {
+    selected:                   @color10;
+    active:                     @color3;
+    text-selected:              @background;
+    urgent:                     @color9;
+    border-color:               @color10;
+    border-tile:                @background-alt;
+}
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "drun,run,filebrowser,wallpaper";
+    show-icons:                 true;
+    display-drun:               " ";
+    display-run:                " ";
+    display-filebrowser:        " ";
+    display-window:             " ";
+    drun-display-format:        "{name}";
+    display-wallpaper:          "Wallpaper ";
+    hover-select:               true;
+}
+
+/* ---- Window ---- */
+window {
+    width:                      720px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+    spacing:                    0px;
+    padding:                    0px;
+    margin:                     0px;
+    border:                     2px;
+    border-color:               @border-color;
+    cursor:                     "default";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    enabled:                    true;
+    border-radius:              14px;
+    background-color:           @background-color;
+}
+
+/* ---- Mainbox: sin relleno, los azulejos viven en cada parte ---- */
+mainbox {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    12px;
+    children:                   [ "inputbar", "listbox" ];
+    border-radius:              12px;
+}
+
+/* ---- Listbox: azulejo inferior ---- */
+listbox {
+    spacing:                    8px;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+    padding:                    8px;
+    border-radius:              10px;
+    background-color:           transparent;
+    border:                     0px;
+}
+
+/* ---- Inputbar: un azulejo más ---- */
+inputbar {
+    enabled:                    true;
+    text-color:                 @foreground;
+    spacing:                    10px;
+    border-radius:              10px;
+    border:                     1px;
+    border-color:               @border-tile;
+    background-color:           @background;
+    children:                   [ "mode-switcher", "textbox-prompt-colon", "entry" ];
+    padding:                    0px 10px 0px 10px;
+    margin-bottom:              10px;
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    padding:                    10px 0px 10px 10px;
+    expand:                     false;
+    str:                        "󰚩 ";
+    text-color:                 @selected;
+    background-color:           transparent;
+}
+
+entry {
+    enabled:                    true;
+    padding:                    10px 0px 10px 0px;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "  Buscar…";
+    background-color:           @background;
+}
+
+mode-switcher {
+    enabled:                    true;
+    spacing:                    8px;
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+button {
+    padding:                    8px 14px 8px 14px;
+    border-radius:             10px;
+    background-color:          @background;
+    text-color:                @foreground;
+    cursor:                    pointer;
+    border:                    1px;
+    border-color:              @border-tile;
+}
+
+button selected {
+    background-color:          @selected;
+    text-color:                @text-selected;
+    border-color:              @border-color;
+}
+
+/* ---- Listview: rejilla de azulejos ---- */
+listview {
+    enabled:                    true;
+    columns:                    4;
+    lines:                      4;
+    spacing:                    6px;
+    padding:                    0px;
+    dynamic:                    true;
+    cycle:                      true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              false;
+    background-color:           transparent;
+    border-radius:              10px;
+    border:                     0px;
+}
+
+scrollbar {
+    border:                     0px;
+    border-radius:              8px;
+    background-color:           transparent;
+    handle-color:               @active;
+    handle-width:               2px;
+    padding:                    0;
+}
+
+/* ---- Element: cada app un azulejo cuadrado ---- */
+element {
+    enabled:                    true;
+    padding:                    18px 16px 18px 16px;
+    margin:                     3px;
+    cursor:                     pointer;
+    background-color:           @background;
+    border-radius:              10px;
+    border:                     1px;
+    border-color:               @border-tile;
+}
+
+element normal.normal {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text selected,
+element selected.normal {
+    background-color:           @selected;
+    text-color:                 @text-selected;
+    border-color:               @border-color;
+}
+
+element selected.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element selected.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 @selected;
+    size:                       34px;
+    cursor:                     inherit;
+}
+
+element selected.normal element-icon {
+    text-color:                 @text-selected;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.5;
+}
+
+message {
+    background-color:           transparent;
+    border:                     0px;
+}
+
+textbox {
+    padding:                     10px;
+    border-radius:              10px;
+    background-color:            @background;
+    text-color:                  @foreground;
+    border:                      1px;
+    border-color:                @border-tile;
+}
+
+error-message {
+    padding:                     12px;
+    border-radius:               10px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}

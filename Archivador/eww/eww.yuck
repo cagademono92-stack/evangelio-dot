@@ -1,0 +1,39 @@
+(defwindow music
+  :monitor 0
+  :geometry (geometry :x "0" :y "14" :width "340" :height "112" :anchor "bottom center")
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (music_widget))
+
+(defwidget music_widget []
+  (box :class "player" :orientation "vertical" :space-evenly false :halign "center" :valign "center"
+    (box :orientation "horizontal" :space-evenly false :halign "center" :valign "center"
+      (button :class "btn" :onclick "playerctl previous" "⏮")
+      (button :class "btn play" :onclick "playerctl play-pause" "⏯")
+      (button :class "btn" :onclick "playerctl next" "⏭")
+      (box :class "info" :orientation "vertical" :space-evenly false :valign "center"
+        (label :class "title" :text {title} :limit-width 26 :halign "start")
+        (label :class "artist" :text {artist} :limit-width 26 :halign "start")))
+    (label :class "cava" :text {cava} :halign "center")))
+
+(defpoll title :interval "1s" "playerctl metadata title 2>/dev/null || echo 'Nada sonando'")
+(defpoll artist :interval "1s" "playerctl metadata artist 2>/dev/null || echo ''")
+
+(defpoll cava :interval "80ms" "cat /tmp/eww-cava.txt 2>/dev/null")
+
+(defwindow clock
+  :monitor 0
+  :geometry (geometry :x "0" :y "0" :width "700" :height "260" :anchor "center")
+  :stacking "background"
+  :exclude-for true
+  :focusable false
+  (big_clock))
+
+(defwidget big_clock []
+  (box :orientation "vertical" :space-evenly false :halign "center" :valign "center"
+    (label :class "big-time" :text {bigtime})
+    (label :class "big-date" :text {bigdate})))
+
+(defpoll bigtime :interval "1s" "date '+%H:%M'")
+(defpoll bigdate :interval "60s" "date '+%A, %d %B'")

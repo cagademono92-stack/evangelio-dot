@@ -1,0 +1,33 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "solarized-dark" — basado en la config principal de rofi (KooL_style-5) */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"
+
+/* ---- Paleta "solarized-dark" ---- */
+* {
+	background:            #002b36;
+	background-color:      #002b36;
+	background-alt:        #073642;
+	foreground:            #93a1a1;
+	selected:              #268bd2;
+	active:                #2aa198;
+	text-selected:         #002b36;
+	urgent:                #dc322f;
+
+	color0:  #002b36;
+	color1:  #073642;
+	color2:  #268bd2;
+	color3:  #2aa198;
+	color4:  #268bd2;
+	color5:  #dc322f;
+	color6:  #073642;
+	color7:  #93a1a1;
+	color8:  #073642;
+	color9:  #dc322f;
+	color10: #268bd2;
+	color11: #2aa198;
+	color12: #268bd2;
+	color13: #268bd2;
+	color14: #2aa198;
+	color15: #93a1a1;
+}

@@ -1,0 +1,227 @@
+/* ---- 🌌 https://github.com/JaKooLit 🌌 ---- */
+/* Tema "neon" — launcher dock inferior centrado con borde de acento brillante,
+   combina con la barra [BOTTOM] Dock Neon. Rejilla de iconos como el dock. */
+
+/* ---- Load wallust colors (dinámicos según wallpaper) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Mapeo semántico al wallpaper (el resto lo define colors-rofi.rasi) ---- */
+* {
+    selected:                   @color10;
+    active:                     @color3;
+    text-selected:              @background;
+    urgent:                     @color9;
+    border-color:               @color10;
+}
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "drun,run,filebrowser";
+    show-icons:                 true;
+    display-drun:               " ";
+    display-run:                " ";
+    display-filebrowser:        " ";
+    display-window:             " ";
+    drun-display-format:        "{name}";
+    hover-select:               true;
+}
+
+/* ---- Window: dock inferior, cápsula luminosa ---- */
+window {
+    width:                      880px;
+    x-offset:                   0px;
+    y-offset:                   8px;
+    spacing:                    0px;
+    padding:                    0px;
+    margin:                     0px;
+    border:                     2px;
+    border-color:               @border-color;
+    cursor:                     "default";
+    location:                   south;
+    anchor:                     south;
+    fullscreen:                 false;
+    enabled:                    true;
+    border-radius:              34px;
+    background-color:           @background-color;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    14px;
+    children:                   [ "inputbar", "listbox" ];
+    border-radius:              30px;
+}
+
+/* ---- Listbox ---- */
+listbox {
+    spacing:                    6px;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+    padding:                    8px;
+    border-radius:              24px;
+    border:                     1px;
+    border-color:               @background-alt;
+    background-color:           @background;
+}
+
+/* ---- Inputbar ---- */
+inputbar {
+    enabled:                    true;
+    text-color:                 @foreground;
+    spacing:                    10px;
+    border-radius:              22px;
+    background-color:           @background-alt;
+    children:                   [ "mode-switcher", "textbox-prompt-colon", "entry" ];
+    padding:                    0px 12px 0px 12px;
+    margin-bottom:              10px;
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    padding:                    10px 0px 10px 10px;
+    expand:                     false;
+    str:                        "󰊗 ";
+    text-color:                 @selected;
+    background-color:           transparent;
+}
+
+entry {
+    enabled:                    true;
+    padding:                    10px 0px 10px 0px;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "  Buscar…";
+    background-color:           @background-alt;
+}
+
+mode-switcher {
+    enabled:                    true;
+    spacing:                    10px;
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+button {
+    padding:                    8px 16px 8px 16px;
+    border-radius:             18px;
+    background-color:          @background;
+    text-color:                @foreground;
+    cursor:                    pointer;
+    border:                    0px;
+}
+
+button selected {
+    background-color:          @selected;
+    text-color:                @text-selected;
+    border:                    0px;
+}
+
+/* ---- Listview: rejilla tipo dock ---- */
+listview {
+    enabled:                    true;
+    columns:                    5;
+    lines:                      2;
+    spacing:                    6px;
+    padding:                    6px;
+    dynamic:                    true;
+    cycle:                      true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               true;
+    fixed-columns:              false;
+    background-color:           transparent;
+    border-radius:              20px;
+    border:                     0px;
+}
+
+scrollbar {
+    border:                     0px;
+    border-radius:              8px;
+    background-color:           transparent;
+    handle-color:               @active;
+    handle-width:               2px;
+    padding:                    0;
+}
+
+/* ---- Element: iconos grandes centrados ---- */
+element {
+    enabled:                    true;
+    padding:                    16px;
+    margin:                     2px;
+    cursor:                     pointer;
+    background-color:           transparent;
+    border-radius:              22px;
+    border:                     0px;
+}
+
+element normal.normal {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text selected,
+element selected.normal {
+    background-color:           @selected;
+    text-color:                 @text-selected;
+}
+
+element selected.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element selected.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 @selected;
+    size:                       38px;
+    cursor:                     inherit;
+}
+
+element selected.normal element-icon {
+    text-color:                 @text-selected;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.5;
+}
+
+message {
+    background-color:           transparent;
+    border:                     0px;
+}
+
+textbox {
+    padding:                     10px;
+    border-radius:              18px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}
+
+error-message {
+    padding:                     12px;
+    border-radius:               18px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}

@@ -1,0 +1,226 @@
+/* ---- 🧊 https://github.com/JaKooLit 🧊 ---- */
+/* Tema "cristal" — launcher en una sola cápsula de vidrio flotante, igual que
+   la barra [Top] Cristal. Búsqueda y lista como "chips" dentro de la cápsula. */
+
+/* ---- Load wallust colors (dinámicos según wallpaper) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Mapeo semántico al wallpaper (el resto lo define colors-rofi.rasi) ---- */
+* {
+    selected:                   @color10;
+    active:                     @color3;
+    text-selected:              @background;
+    urgent:                     @color9;
+    border-color:               @color10;
+}
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "drun,run,filebrowser,wallpaper";
+    show-icons:                 true;
+    display-drun:               " ";
+    display-run:                " ";
+    display-filebrowser:        " ";
+    display-window:             " ";
+    drun-display-format:        "{name}";
+    display-wallpaper:          "Wallpaper ";
+    hover-select:               true;
+}
+
+/* ---- Window: la cápsula completa ---- */
+window {
+    width:                      660px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+    spacing:                    0px;
+    padding:                    0px;
+    margin:                     0px;
+    border:                     2px;
+    border-color:               @border-color;
+    cursor:                     "default";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    enabled:                    true;
+    border-radius:              34px;
+    background-color:           @background-color;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    16px;
+    children:                   [ "inputbar", "listbox" ];
+    border-radius:              32px;
+}
+
+/* ---- Listbox: chip inferior ---- */
+listbox {
+    spacing:                    6px;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+    padding:                    10px;
+    border-radius:              24px;
+    border:                     1px;
+    border-color:               @background-alt;
+    background-color:           @background;
+}
+
+/* ---- Inputbar: chip superior resaltado con borde de acento ---- */
+inputbar {
+    enabled:                    true;
+    text-color:                 @foreground;
+    spacing:                    10px;
+    border-radius:              22px;
+    border:                     2px;
+    border-color:               @border-color;
+    background-color:           @background;
+    children:                   [ "mode-switcher", "textbox-prompt-colon", "entry" ];
+    padding:                    0px 12px 0px 12px;
+    margin-bottom:              12px;
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    padding:                    12px 0px 12px 12px;
+    expand:                     false;
+    str:                        "󰐎 ";
+    text-color:                 @selected;
+    background-color:           transparent;
+}
+
+entry {
+    enabled:                    true;
+    padding:                    12px 0px 12px 0px;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "  Buscar…";
+    background-color:           @background;
+}
+
+mode-switcher {
+    enabled:                    true;
+    spacing:                    10px;
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+button {
+    padding:                    8px 16px 8px 16px;
+    border-radius:             18px;
+    background-color:          @background;
+    text-color:                @foreground;
+    cursor:                    pointer;
+    border:                    0px;
+}
+
+button selected {
+    background-color:          @selected;
+    text-color:                @text-selected;
+    border:                    0px;
+}
+
+/* ---- Listview ---- */
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      8;
+    spacing:                    6px;
+    padding:                    4px;
+    dynamic:                    true;
+    cycle:                      true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              false;
+    background-color:           transparent;
+    border-radius:              18px;
+    border:                     0px;
+}
+
+scrollbar {
+    border:                     0px;
+    border-radius:              8px;
+    background-color:           transparent;
+    handle-color:               @active;
+    handle-width:               2px;
+    padding:                    0;
+}
+
+/* ---- Element ---- */
+element {
+    enabled:                    true;
+    padding:                    12px;
+    margin:                     2px 0px;
+    cursor:                     pointer;
+    background-color:           transparent;
+    border-radius:              18px;
+    border:                     0px;
+}
+
+element normal.normal {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text selected,
+element selected.normal {
+    background-color:           @selected;
+    text-color:                 @text-selected;
+}
+
+element selected.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element selected.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 inherit;
+    size:                       28px;
+    cursor:                     inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0;
+}
+
+message {
+    background-color:           transparent;
+    border:                     0px;
+}
+
+textbox {
+    padding:                     10px;
+    border-radius:              18px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}
+
+error-message {
+    padding:                     12px;
+    border-radius:               18px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}

@@ -1,0 +1,7 @@
+/* Generado por matugen — NO editar a mano, se sobreescribe con cada wallpaper */
+@define-color background {{colors.background.default.hex}};
+@define-color foreground {{colors.on_background.default.hex}};
+@define-color accent {{colors.primary.default.hex}};
+@define-color accent-bright {{colors.tertiary.default.hex}};
+@define-color border {{colors.surface_variant.default.hex}};
+@define-color alert {{colors.error.default.hex}};

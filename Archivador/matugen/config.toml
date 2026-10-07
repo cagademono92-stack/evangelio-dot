@@ -1,0 +1,45 @@
+[config]
+
+# NOTA: los post_hook se eliminaron a propósito. La recarga en vivo de todas
+# las apps (waybar, kitty, fish, swaync, nwg-bar, bordes de Hyprland) la hace
+# ~/.config/hypr/hyprland/scripts/apply-theme.sh, que se dispara desde
+# retheme.sh (hookeado en waypaper y en wallpaper.sh).
+
+[templates.waybar]
+input_path = '~/.config/matugen/templates/waybar-colors.css'
+output_path = '~/.config/waybar/colors.css'
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/wallust/colors-rofi.rasi'
+
+[templates.fish]
+input_path = '~/.config/matugen/templates/fish-colors.fish'
+output_path = '~/.config/fish/conf.d/zzz_custom_theme.fish'
+
+[templates.nwgbar]
+input_path = '~/.config/matugen/templates/nwgbar-colors.css'
+output_path = '~/.config/nwg-bar/colors.css'
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-theme.conf'
+output_path = '~/.config/kitty/current-theme.conf'
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland-colors.lua'
+output_path = '~/.config/hypr/hyprland/colors.lua'
+
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
+output_path = '~/.config/hypr/hyprlock/colors.conf'
+
+[templates.swaync]
+input_path = '~/.config/matugen/templates/swaync-colors.css'
+output_path = '~/.config/swaync/colors.css'
+[templates.conky]
+input_path = '~/.config/matugen/templates/conky.conf'
+output_path = '~/.config/conky/conky.conf'
+
+[templates.eww]
+input_path = '~/.config/matugen/templates/eww-colors.scss'
+output_path = '~/.config/eww/colors.scss'

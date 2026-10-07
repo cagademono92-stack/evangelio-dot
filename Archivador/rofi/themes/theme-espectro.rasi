@@ -1,0 +1,196 @@
+/* ---- 👻 https://github.com/JaKooLit 👻 ---- */
+/* Tema "espectro" — launcher minimalista centrado, casi transparente, combina
+   con la barra [Minimal] Espectro. */
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "drun,run,filebrowser";
+    show-icons:                 false;
+    display-drun:               "  ";
+    display-run:                "  ";
+    display-filebrowser:        "  ";
+    display-window:             "  ";
+    drun-display-format:        "{name}";
+    hover-select:               true;
+}
+
+/* ---- Load wallust colors (dinámicos según wallpaper) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Mapeo semántico al wallpaper (el resto lo define colors-rofi.rasi) ---- */
+* {
+    selected:                   @color10;
+    active:                     @color3;
+    text-selected:              @background;
+    urgent:                     @color9;
+    border-color:               @color10;
+}
+
+/* ---- Window: caja flotante pequeña y minimalista ---- */
+window {
+    width:                      520px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+    spacing:                    0px;
+    padding:                    0px;
+    margin:                     0px;
+    border:                     1px;
+    border-color:               @border-color;
+    cursor:                     "default";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    enabled:                    true;
+    border-radius:              14px;
+    background-color:           rgba(17, 17, 17, 0.92);
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    6px;
+    children:                   [ "inputbar", "listbox" ];
+    border-radius:              12px;
+}
+
+/* ---- Listbox ---- */
+listbox {
+    spacing:                    2px;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+    padding:                    2px;
+    border-radius:              10px;
+}
+
+/* ---- Inputbar: solo una línea de texto ---- */
+inputbar {
+    enabled:                    true;
+    text-color:                 @foreground;
+    spacing:                    8px;
+    border-radius:              8px;
+    border:                     0px;
+    border-bottom:              1px;
+    border-color:               @border-color;
+    background-color:           transparent;
+    children:                   [ "textbox-prompt-colon", "entry" ];
+    padding:                    0px 8px 4px 8px;
+    margin-bottom:              4px;
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    padding:                    4px 0px 4px 4px;
+    expand:                     false;
+    str:                        "›";
+    text-color:                 @selected;
+    background-color:           transparent;
+}
+
+entry {
+    enabled:                    true;
+    padding:                    4px 4px 4px 0px;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "buscar…";
+    background-color:           transparent;
+}
+
+/* ---- Listview ---- */
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      8;
+    spacing:                    2px;
+    padding:                    2px;
+    dynamic:                    true;
+    cycle:                      true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              false;
+    background-color:           transparent;
+    border-radius:              10px;
+    border:                     0px;
+}
+
+scrollbar {
+    border:                     0px;
+    border-radius:              6px;
+    background-color:           transparent;
+    handle-color:               @active;
+    handle-width:               2px;
+    padding:                    0;
+}
+
+/* ---- Element: sin cajas, solo texto ---- */
+element {
+    enabled:                    true;
+    padding:                    6px 10px 6px 10px;
+    margin:                     0px;
+    cursor:                     pointer;
+    background-color:           transparent;
+    border-radius:              8px;
+    border:                     0px;
+    border-bottom:              1px;
+    border-color:               transparent;
+}
+
+element normal.normal {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text selected,
+element selected.normal {
+    background-color:           @selected;
+    text-color:                 @text-selected;
+}
+
+element selected.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element selected.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0;
+}
+
+message {
+    background-color:           transparent;
+    border:                     0px;
+}
+
+textbox {
+    padding:                     6px;
+    border-radius:              8px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+error-message {
+    padding:                     10px;
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}

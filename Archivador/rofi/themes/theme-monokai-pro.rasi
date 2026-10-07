@@ -1,0 +1,33 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "monokai-pro" — basado en la config principal de rofi (KooL_style-5) */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"
+
+/* ---- Paleta "monokai-pro" ---- */
+* {
+	background:            #2d2a2e;
+	background-color:      #2d2a2e;
+	background-alt:        #403e41;
+	foreground:            #fcfcfa;
+	selected:              #ffd866;
+	active:                #fc9867;
+	text-selected:         #2d2a2e;
+	urgent:                #ff6188;
+
+	color0:  #2d2a2e;
+	color1:  #403e41;
+	color2:  #ffd866;
+	color3:  #fc9867;
+	color4:  #ffd866;
+	color5:  #ff6188;
+	color6:  #403e41;
+	color7:  #fcfcfa;
+	color8:  #403e41;
+	color9:  #ff6188;
+	color10: #ffd866;
+	color11: #fc9867;
+	color12: #ffd866;
+	color13: #ffd866;
+	color14: #fc9867;
+	color15: #fcfcfa;
+}

@@ -1,0 +1,207 @@
+/* ----------- 🌌 https://github.com/JaKooLit 🌌 -------- */
+/* [BOTTOM] Aurora Glass — dock inferior glassmorphism: cristal frío
+   translúcido, brillo superior y workspaces que se "iluminan" con el
+   acento del wallpaper como una aurora. Usa "[BOTTOM] Aurora Glass". */
+
+/* Colores dinámicos del wallpaper (generado por matugen) */
+@import "colors.css";
+
+* {
+	font-family: "JetBrainsMono Nerd Font";
+	font-weight: 500;
+	min-height: 0;
+	font-size: 92%;
+	font-feature-settings: '"zero", "ss01", "ss02", "ss03"';
+}
+
+window#waybar {
+	background: transparent;
+	color: @foreground;
+}
+
+window#waybar.bottom {
+	background: rgba(24, 34, 54, 0.5);
+	border-radius: 24px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	box-shadow: 0 12px 44px rgba(0, 0, 0, 0.4),
+	            inset 0 1px 0 rgba(255, 255, 255, 0.12),
+	            0 0 30px -8px @accent;
+}
+
+window#waybar.hidden {
+	opacity: 0.5;
+}
+
+tooltip {
+	background: rgba(20, 28, 46, 0.95);
+	border-radius: 14px;
+	border: 1px solid alpha(@accent, 0.5);
+	color: @accent-bright;
+	box-shadow: 0 0 18px -6px @accent;
+}
+
+/* ---- contenedores ---- */
+.modules-left,
+.modules-center,
+.modules-right {
+	background: transparent;
+	padding: 2px 8px;
+}
+
+/* ---- módulos: cristal solo al pasar el cursor ---- */
+#custom-menu,
+#clock,
+#custom-weather,
+#cpu,
+#memory,
+#custom-themes,
+#tray,
+#custom-swaync,
+#mpris,
+#network,
+#bluetooth,
+#backlight,
+#custom-display,
+#pulseaudio,
+#battery,
+#custom-power,
+#group-bgapps {
+	padding: 4px 11px;
+	margin: 0 2px;
+	border-radius: 16px;
+	color: @foreground;
+	transition: all 0.25s ease;
+}
+
+#custom-menu:hover,
+#clock:hover,
+#custom-weather:hover,
+#cpu:hover,
+#memory:hover,
+#custom-themes:hover,
+#custom-swaync:hover,
+#mpris:hover,
+#network:hover,
+#bluetooth:hover,
+#backlight:hover,
+#custom-display:hover,
+#pulseaudio:hover,
+#battery:hover,
+#custom-power:hover,
+#group-bgapps:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid alpha(@accent, 0.35);
+	color: @accent-bright;
+	box-shadow: 0 0 16px -6px @accent;
+}
+
+#custom-menu {
+	background: alpha(@accent, 0.28);
+	border: 1px solid @accent;
+	color: @foreground;
+	font-size: 105%;
+	box-shadow: 0 0 16px -4px @accent;
+}
+
+#custom-menu:hover {
+	background: @accent;
+	color: @background;
+	border: 1px solid @accent;
+}
+
+/* ---- workspaces: orbes de aurora ---- */
+#workspaces button {
+	min-height: 22px;
+	min-width: 22px;
+	margin: 2px 5px;
+	padding: 0 8px;
+	border-radius: 999px;
+	color: @accent-bright;
+	background: rgba(255, 255, 255, 0.07);
+	box-shadow: none;
+	text-shadow: none;
+	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button.active {
+	background: @accent;
+	color: @background;
+	box-shadow: 0 0 18px @accent, 0 0 40px -10px @accent-bright;
+	font-weight: bold;
+}
+
+#workspaces button.focused {
+	color: @accent-bright;
+}
+
+#workspaces button.urgent {
+	color: @alert;
+	animation: blink 2s steps(4) infinite;
+}
+
+#workspaces button:hover {
+	background: @accent-bright;
+	color: @background;
+	border-radius: 999px;
+	box-shadow: 0 0 18px @accent-bright;
+}
+
+/* ---- estados / alertas ---- */
+#battery.critical:not(.charging) {
+	color: @alert;
+}
+
+#pulseaudio.muted,
+#pulseaudio.microphone.muted {
+	color: @alert;
+}
+
+#custom-hypridle.notactive,
+#idle_inhibitor.activated {
+	color: #39FF14;
+}
+
+@keyframes blink {
+	to {
+		color: @background;
+	}
+}
+/* Temperatura CPU/GPU — módulos añadidos a todos los themes */
+#temperature#cpu,
+#custom-gpu_temp,
+#custom-gpu_temp.gpu {
+	padding: 4px 8px;
+	border-radius: 18px;
+	color: @foreground;
+}
+#temperature#cpu.critical {
+	color: @alert;
+}
+#custom-gpu_temp.hidden {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
+}
+
+/* ---- Slots vacíos del drawer de apps ocultas (bgapps.sh) ----
+   Cuando un slot no tiene ninguna app, bgapps.sh manda "text":"" — sin esto
+   el botón igual se dibuja como un cuadrado vacío con su padding/fondo. */
+#custom-bgapp1.empty,
+#custom-bgapp2.empty,
+#custom-bgapp3.empty,
+#custom-bgapp4.empty,
+#custom-bgapp5.empty,
+#custom-bgapp6.empty,
+#custom-bgapp7.empty,
+#custom-bgapp8.empty {
+	min-width: 0;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: transparent;
+	opacity: 0;
+}

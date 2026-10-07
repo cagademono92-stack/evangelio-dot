@@ -1,0 +1,224 @@
+/* ---- 🟩 https://github.com/JaKooLit 🟩 ---- */
+/* Tema "matrix" — launcher terminal superior: línea de comandos sobre
+   listado en columna, como una terminal del sistema.
+   Combina con la barra [TOP] Matrix Code. */
+
+/* ---- Configuración ---- */
+configuration {
+    modi:                       "drun,run,filebrowser";
+    show-icons:                 true;
+    display-drun:               "$ ";
+    display-run:                "> ";
+    display-filebrowser:        "./ ";
+    display-window:             "# ";
+    drun-display-format:        "{name}";
+    hover-select:               true;
+}
+
+/* ---- Carga colores wallust (dinámicos según wallpaper) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Mapeo semántico al wallpaper ---- */
+* {
+    selected:                   @color10;
+    active:                     @color3;
+    text-selected:              @background;
+    urgent:                     @color9;
+    border-color:               @color10;
+}
+
+/* ---- Window: terminal superior ---- */
+window {
+    width:                      640px;
+    x-offset:                   0px;
+    y-offset:                   10px;
+    spacing:                    0px;
+    padding:                    0px;
+    margin:                     0px;
+    border:                     1px;
+    border-color:               @border-color;
+    cursor:                     "default";
+    location:                   north;
+    anchor:                     north;
+    fullscreen:                 false;
+    enabled:                    true;
+    border-radius:              14px;
+    background-color:           @background-color;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    12px;
+    children:                   [ "inputbar", "listbox" ];
+    border-radius:              12px;
+}
+
+/* ---- Listbox ---- */
+listbox {
+    spacing:                    2px;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+    padding:                    4px;
+    border-radius:              8px;
+    background-color:           @background;
+}
+
+/* ---- Inputbar: prompt de terminal ---- */
+inputbar {
+    enabled:                    true;
+    text-color:                 @foreground;
+    spacing:                    10px;
+    border-radius:              8px;
+    border:                     1px;
+    border-color:               @border-color;
+    background-color:           @background;
+    children:                   [ "mode-switcher", "textbox-prompt-colon", "entry" ];
+    padding:                    0px 10px 0px 10px;
+    margin-bottom:              8px;
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    padding:                    10px 0px 10px 6px;
+    expand:                     false;
+    str:                        "$ ";
+    text-color:                 @selected;
+    background-color:           transparent;
+}
+
+entry {
+    enabled:                    true;
+    padding:                    10px 0px 10px 6px;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "  run command…";
+    background-color:           @background;
+}
+
+mode-switcher {
+    enabled:                    true;
+    spacing:                    6px;
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+button {
+    padding:                    6px 10px 6px 10px;
+    border-radius:             8px;
+    background-color:          @background;
+    text-color:                @foreground;
+    cursor:                    pointer;
+    border:                    0px;
+}
+
+button selected {
+    background-color:          @selected;
+    text-color:                @text-selected;
+    border:                    0px;
+}
+
+/* ---- Listview: una columna ---- */
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      8;
+    spacing:                    2px;
+    padding:                    2px;
+    dynamic:                    true;
+    cycle:                      true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              false;
+    background-color:           transparent;
+    border-radius:              8px;
+    border:                     0px;
+}
+
+scrollbar {
+    border:                     0px;
+    border-radius:              6px;
+    background-color:           transparent;
+    handle-color:               @active;
+    handle-width:               2px;
+    padding:                    0;
+}
+
+/* ---- Element ---- */
+element {
+    enabled:                    true;
+    padding:                    8px 10px 8px 10px;
+    margin:                     0px;
+    cursor:                     pointer;
+    background-color:           transparent;
+    border-radius:             8px;
+    border:                     0px;
+}
+
+element normal.normal {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text selected,
+element selected.normal {
+    background-color:           @selected;
+    text-color:                 @text-selected;
+}
+
+element selected.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element selected.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 @selected;
+    size:                       20px;
+    cursor:                     inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0;
+}
+
+message {
+    background-color:           transparent;
+    border:                     0px;
+}
+
+textbox {
+    padding:                     8px;
+    border-radius:              8px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+error-message {
+    padding:                     10px;
+    border-radius:               8px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}

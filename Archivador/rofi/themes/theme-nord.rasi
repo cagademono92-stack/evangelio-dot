@@ -1,0 +1,33 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "nord" — basado en la config principal de rofi (KooL_style-5) */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"
+
+/* ---- Paleta "nord" ---- */
+* {
+	background:            #2e3440;
+	background-color:      #2e3440;
+	background-alt:        #3b4252;
+	foreground:            #d8dee9;
+	selected:              #88c0d0;
+	active:                #81a1c1;
+	text-selected:         #2e3440;
+	urgent:                #bf616a;
+
+	color0:  #2e3440;
+	color1:  #3b4252;
+	color2:  #88c0d0;
+	color3:  #81a1c1;
+	color4:  #88c0d0;
+	color5:  #bf616a;
+	color6:  #3b4252;
+	color7:  #d8dee9;
+	color8:  #434c5e;
+	color9:  #bf616a;
+	color10: #88c0d0;
+	color11: #81a1c1;
+	color12: #88c0d0;
+	color13: #88c0d0;
+	color14: #81a1c1;
+	color15: #d8dee9;
+}

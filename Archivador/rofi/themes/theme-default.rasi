@@ -1,0 +1,5 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "default" — exactamente la config principal de rofi (KooL_style-5,
+   colores generados por matugen/wallust según el wallpaper). */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"

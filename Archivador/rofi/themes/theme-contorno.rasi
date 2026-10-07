@@ -1,0 +1,234 @@
+/* ---- ✏️ https://github.com/JaKooLit ✏️ ---- */
+/* Tema "contorno" — launcher estilo blueprint: sin rellenos, todo se dibuja
+   con contornos finos (borde 1px), como la barra [Top] Contorno. */
+
+/* ---- Load wallust colors (dinámicos según wallpaper) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Mapeo semántico al wallpaper (el resto lo define colors-rofi.rasi) ---- */
+* {
+    selected:                   @color10;
+    active:                     @color3;
+    text-selected:              @color10;
+    urgent:                     @color9;
+    border-color:               @color10;
+    border-line:                @background-alt;
+}
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "drun,run,filebrowser";
+    show-icons:                 true;
+    display-drun:               " ";
+    display-run:                " ";
+    display-filebrowser:        " ";
+    display-window:             " ";
+    drun-display-format:        "{name}";
+    hover-select:               true;
+}
+
+/* ---- Window: solo un borde de acento, nada de rellenos pesados ---- */
+window {
+    width:                      620px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+    spacing:                    0px;
+    padding:                    0px;
+    margin:                     0px;
+    border:                     2px;
+    border-color:               @border-color;
+    cursor:                     "default";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    enabled:                    true;
+    border-radius:              12px;
+    background-color:           @background-color;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    10px;
+    children:                   [ "inputbar", "listbox" ];
+    border-radius:              8px;
+}
+
+/* ---- Listbox: transparente, los contornos viven en cada elemento ---- */
+listbox {
+    spacing:                    8px;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+    padding:                    0px;
+    border-radius:              0px;
+    background-color:           transparent;
+    border:                     0px;
+}
+
+/* ---- Inputbar: contorno de acento ---- */
+inputbar {
+    enabled:                    true;
+    text-color:                 @foreground;
+    spacing:                    10px;
+    border-radius:              8px;
+    border:                     1px;
+    border-color:               @border-color;
+    background-color:           transparent;
+    children:                   [ "mode-switcher", "textbox-prompt-colon", "entry" ];
+    padding:                    0px 10px 0px 10px;
+    margin-bottom:              8px;
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    padding:                    9px 0px 9px 9px;
+    expand:                     false;
+    str:                        " ";
+    text-color:                 @selected;
+    background-color:           transparent;
+}
+
+entry {
+    enabled:                    true;
+    padding:                    9px 0px 9px 0px;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "  Buscar…";
+    background-color:           transparent;
+}
+
+mode-switcher {
+    enabled:                    true;
+    spacing:                    8px;
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+button {
+    padding:                    7px 14px 7px 14px;
+    border-radius:             8px;
+    background-color:          transparent;
+    text-color:                @foreground;
+    cursor:                    pointer;
+    border:                    1px;
+    border-color:              @border-line;
+}
+
+button selected {
+    background-color:          transparent;
+    text-color:                @selected;
+    border-color:              @border-color;
+}
+
+/* ---- Listview ---- */
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      8;
+    spacing:                    6px;
+    padding:                    2px;
+    dynamic:                    true;
+    cycle:                      true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              false;
+    background-color:           transparent;
+    border-radius:              0px;
+    border:                     0px;
+}
+
+scrollbar {
+    border:                     0px;
+    border-radius:              8px;
+    background-color:           transparent;
+    handle-color:               @active;
+    handle-width:               2px;
+    padding:                    0;
+}
+
+/* ---- Element: caja solo con contorno ---- */
+element {
+    enabled:                    true;
+    padding:                    10px;
+    margin:                     2px 0px;
+    cursor:                     pointer;
+    background-color:           transparent;
+    border-radius:              8px;
+    border:                     1px;
+    border-color:               @border-line;
+}
+
+element normal.normal {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text selected,
+element selected.normal {
+    background-color:           transparent;
+    text-color:                 @text-selected;
+    border-color:               @border-color;
+}
+
+element selected.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element selected.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 @active;
+    size:                       26px;
+    cursor:                     inherit;
+}
+
+element selected.normal element-icon {
+    text-color:                 @text-selected;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0;
+}
+
+message {
+    background-color:           transparent;
+    border:                     0px;
+}
+
+textbox {
+    padding:                     9px;
+    border-radius:              8px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    border:                      1px;
+    border-color:                @border-line;
+}
+
+error-message {
+    padding:                     10px;
+    border-radius:               8px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}

@@ -1,0 +1,33 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "catppuccin" — basado en la config principal de rofi (KooL_style-5) */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"
+
+/* ---- Paleta "catppuccin" ---- */
+* {
+	background:            #1e1e2e;
+	background-color:      #1e1e2e;
+	background-alt:        #313244;
+	foreground:            #cdd6f4;
+	selected:              #cba6f7;
+	active:                #89b4fa;
+	text-selected:         #1e1e2e;
+	urgent:                #f38ba8;
+
+	color0:  #1e1e2e;
+	color1:  #313244;
+	color2:  #cba6f7;
+	color3:  #89b4fa;
+	color4:  #cba6f7;
+	color5:  #f38ba8;
+	color6:  #313244;
+	color7:  #cdd6f4;
+	color8:  #313244;
+	color9:  #f38ba8;
+	color10: #cba6f7;
+	color11: #89b4fa;
+	color12: #cba6f7;
+	color13: #cba6f7;
+	color14: #89b4fa;
+	color15: #cdd6f4;
+}

@@ -1,0 +1,47 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+// ### [BOTTOM] macOS Dock ### //
+// Dock inferior centrado estilo macOS: cápsula "frosted glass" oscura con
+// separadores finos entre módulos (como la barra de menús de macOS).
+
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules",
+  ],
+"layer": "top",
+"position": "bottom",
+"width": 1180,
+"margin-bottom": 10,
+
+"modules-left": [
+	"custom/menu",
+	"group/bgapps",
+	"clock",
+	"custom/weather",
+	"cpu",
+	"memory",
+	"temperature#cpu",
+	"custom/gpu_temp",
+	],
+
+"modules-center": [
+	"hyprland/workspaces#roman"
+	],
+
+"modules-right": [
+	"mpris",
+	"network",
+	"bluetooth",
+	"backlight",
+	"custom/display",
+	"pulseaudio",
+	"battery",
+	"custom/themes",
+	"group/notify",
+	"tray",
+	"custom/power"],
+}

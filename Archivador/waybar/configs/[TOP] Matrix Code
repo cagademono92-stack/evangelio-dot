@@ -1,0 +1,46 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+// ### [TOP] Matrix Code ### //
+// Barra superior estilo Matrix: negro profundo, texto verde fósforo y
+// toques de cian. Imita una terminal/símbolo del sistema.
+
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules",
+  ],
+"layer": "top",
+"position": "top",
+"width": 1200,
+"margin-top": 8,
+
+"modules-left": [
+	"custom/menu",
+	"clock",
+	"custom/weather",
+	"cpu",
+	"memory",
+	"temperature#cpu",
+	"custom/gpu_temp",
+	],
+
+"modules-center": [
+	"hyprland/workspaces#roman"
+	],
+
+"modules-right": [
+	"custom/themes",
+	"tray",
+	"group/notify",
+	"mpris",
+	"network",
+	"bluetooth",
+	"backlight",
+	"custom/display",
+	"pulseaudio",
+	"battery",
+	"custom/power"],
+}

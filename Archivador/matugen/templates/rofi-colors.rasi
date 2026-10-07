@@ -1,0 +1,25 @@
+/* Generado por matugen — NO editar a mano, se sobreescribe con cada wallpaper */
+* {
+	background:          {{colors.background.default.hex}};
+	background-color:    {{colors.background.default.hex}};
+	background-alt:      {{colors.surface_variant.default.hex}};
+	foreground:          {{colors.on_background.default.hex}};
+	active-background:   {{colors.surface_variant.default.hex}};
+
+	color0:  {{colors.background.default.hex}};
+	color1:  {{colors.surface_variant.default.hex}};
+	color2:  {{colors.secondary.default.hex}};
+	color3:  {{colors.tertiary.default.hex}};
+	color4:  {{colors.primary_container.default.hex}};
+	color5:  {{colors.error_container.default.hex}};
+	color6:  {{colors.secondary_container.default.hex}};
+	color7:  {{colors.on_background.default.hex}};
+	color8:  {{colors.outline.default.hex}};
+	color9:  {{colors.error.default.hex}};
+	color10: {{colors.primary.default.hex}};
+	color11: {{colors.tertiary.default.hex}};
+	color12: {{colors.primary.default.hex}};
+	color13: {{colors.secondary.default.hex}};
+	color14: {{colors.tertiary.default.hex}};
+	color15: {{colors.on_background.default.hex}};
+}

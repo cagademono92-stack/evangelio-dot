@@ -1,0 +1,184 @@
+/* ----------- ✏️ https://github.com/JaKooLit ✏️ -------- */
+/* [Top] Contorno — barra transparente tipo "blueprint": sin rellenos,
+   cada módulo solo se dibuja con su contorno (borde fino 1px).
+   El acento aparece en el workspace activo y en hover.
+   Usa el config "[TOP] Minimal Espectro". */
+
+/* Colores dinámicos del wallpaper (generado por matugen) */
+@import "colors.css";
+
+* {
+	font-family: "JetBrainsMono Nerd Font";
+	font-weight: normal;
+	min-height: 0;
+	font-size: 88%;
+	font-feature-settings: '"zero", "ss01", "ss02", "cv31"';
+}
+
+window#waybar {
+	background: transparent;
+	color: @foreground;
+}
+
+window#waybar.hidden {
+	opacity: 0.3;
+}
+
+tooltip {
+	background: #101014;
+	border-radius: 8px;
+	border: 1px solid @accent;
+	color: @accent-bright;
+}
+
+/* ---- sin fondos, solo esquinas y línea base ---- */
+.modules-left,
+.modules-center,
+.modules-right {
+	background: transparent;
+	padding: 0 6px;
+}
+
+#custom-menu,
+#clock,
+#custom-weather,
+#cpu,
+#memory,
+#custom-themes,
+#tray,
+#custom-swaync,
+#mpris,
+#network,
+#bluetooth,
+#backlight,
+#custom-display,
+#pulseaudio,
+#battery,
+#custom-power {
+	padding: 5px 9px;
+	margin: 4px 2px;
+	border-radius: 8px;
+	border: 1px solid @border;
+	color: @foreground;
+	transition: all 0.25s ease;
+}
+
+#custom-menu,
+#clock,
+#custom-weather,
+#cpu,
+#memory,
+#custom-themes,
+#tray,
+#custom-swaync,
+#mpris,
+#network,
+#bluetooth,
+#backlight,
+#custom-display,
+#pulseaudio,
+#battery,
+#custom-power:hover {
+	border: 1px solid @accent;
+	color: @accent-bright;
+}
+
+#custom-menu {
+	border: 1px solid @accent;
+	color: @accent;
+	font-size: 105%;
+}
+
+/* ---- workspaces: solo línea de acento bajo el activo ---- */
+#taskbar button,
+#workspaces button {
+	padding: 7px 9px;
+	margin: 4px 2px;
+	color: @foreground;
+	border-bottom: 1px solid @border;
+	border-radius: 0;
+	box-shadow: none;
+	text-shadow: none;
+	transition: all 0.25s ease;
+}
+
+#taskbar button.active,
+#workspaces button.active {
+	color: @accent-bright;
+	border-bottom: 2px solid @accent;
+}
+
+#workspaces button.focused {
+	color: @accent-bright;
+}
+
+#workspaces button.urgent {
+	color: @alert;
+	animation: blink 2s steps(4) infinite;
+}
+
+#taskbar button:hover,
+#workspaces button:hover {
+	color: @accent;
+	border-bottom: 2px solid @accent;
+}
+
+/* ---- estados / alertas ---- */
+#battery.critical:not(.charging) {
+	color: @alert;
+}
+
+#pulseaudio.muted,
+#pulseaudio.microphone.muted {
+	color: @alert;
+}
+
+#custom-hypridle.notactive,
+#idle_inhibitor.activated {
+	color: #4ade80;
+}
+
+@keyframes blink {
+	to {
+		color: @background;
+	}
+}
+/* Temperatura CPU/GPU — módulos añadidos a todos los themes */
+#temperature#cpu,
+#custom-gpu_temp,
+#custom-gpu_temp.gpu {
+	padding: 4px 8px;
+	border-radius: 18px;
+	color: @foreground;
+}
+#temperature#cpu.critical {
+	color: @alert;
+}
+#custom-gpu_temp.hidden {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
+}
+
+/* ---- Slots vacíos del drawer de apps ocultas (bgapps.sh) ----
+   Cuando un slot no tiene ninguna app, bgapps.sh manda "text":"" — sin esto
+   el botón igual se dibuja como un cuadrado vacío con su padding/fondo. */
+#custom-bgapp1.empty,
+#custom-bgapp2.empty,
+#custom-bgapp3.empty,
+#custom-bgapp4.empty,
+#custom-bgapp5.empty,
+#custom-bgapp6.empty,
+#custom-bgapp7.empty,
+#custom-bgapp8.empty {
+	min-width: 0;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: transparent;
+	opacity: 0;
+}

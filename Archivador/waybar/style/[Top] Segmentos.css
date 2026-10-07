@@ -1,0 +1,170 @@
+/* ----------- 🎰 https://github.com/JaKooLit 🎰 -------- */
+/* [Top] Segmentos — cada grupo (izq/centro/dcha) es su propia píldora.
+   El centro queda resaltado con borde de acento.
+   Usa el config "[TOP] Segmentado". */
+
+/* Colores dinámicos del wallpaper (generado por matugen) */
+@import "colors.css";
+
+* {
+	font-family: "JetBrainsMono Nerd Font";
+	font-weight: bold;
+	min-height: 0;
+	font-size: 93%;
+	font-feature-settings: '"zero", "ss01", "ss02", "ss03"';
+}
+
+window#waybar {
+	background: transparent;
+	color: @foreground;
+}
+
+window#waybar.hidden {
+	opacity: 0.5;
+}
+
+tooltip {
+	background: #1a1730;
+	border-radius: 12px;
+	border: 1px solid @border;
+	color: @accent-bright;
+}
+
+/* ---- cada grupo = píldora independiente, separadas ---- */
+.modules-left,
+.modules-right {
+	background: @background;
+	border: 1px solid @border;
+	border-radius: 26px;
+	padding: 2px 10px;
+	margin: 0 4px;
+}
+
+.modules-center {
+	background: @background;
+	border: 2px solid @accent;
+	border-radius: 26px;
+	padding: 2px 12px;
+	margin: 0 4px;
+}
+
+#custom-menu,
+#clock,
+#custom-weather,
+#cpu,
+#memory,
+#custom-themes,
+#tray,
+#custom-swaync,
+#mpris,
+#network,
+#bluetooth,
+#backlight,
+#custom-display,
+#pulseaudio,
+#battery,
+#custom-power {
+	padding: 4px 8px;
+	border-radius: 18px;
+	color: @foreground;
+}
+
+#custom-menu {
+	background: @accent;
+	color: @background;
+	font-size: 105%;
+}
+
+/* ---- workspaces ---- */
+#taskbar button,
+#workspaces button {
+	padding: 4px 8px;
+	margin: 0 2px;
+	border-radius: 16px;
+	color: @accent-bright;
+	box-shadow: none;
+	text-shadow: none;
+	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#taskbar button.active,
+#workspaces button.active {
+	background: @accent;
+	color: @background;
+}
+
+#workspaces button.focused {
+	color: @accent-bright;
+}
+
+#workspaces button.urgent {
+	color: @alert;
+	animation: blink 2s steps(4) infinite;
+}
+
+#taskbar button:hover,
+#workspaces button:hover {
+	background: @background;
+	color: @accent-bright;
+	border-radius: 16px;
+}
+
+/* ---- estados / alertas ---- */
+#battery.critical:not(.charging) {
+	color: @alert;
+}
+
+#pulseaudio.muted,
+#pulseaudio.microphone.muted {
+	color: @alert;
+}
+
+#custom-hypridle.notactive,
+#idle_inhibitor.activated {
+	color: #39FF14;
+}
+
+@keyframes blink {
+	to {
+		color: @background;
+	}
+}
+/* Temperatura CPU/GPU — módulos añadidos a todos los themes */
+#temperature#cpu,
+#custom-gpu_temp,
+#custom-gpu_temp.gpu {
+	padding: 4px 8px;
+	border-radius: 18px;
+	color: @foreground;
+}
+#temperature#cpu.critical {
+	color: @alert;
+}
+#custom-gpu_temp.hidden {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
+}
+
+/* ---- Slots vacíos del drawer de apps ocultas (bgapps.sh) ----
+   Cuando un slot no tiene ninguna app, bgapps.sh manda "text":"" — sin esto
+   el botón igual se dibuja como un cuadrado vacío con su padding/fondo. */
+#custom-bgapp1.empty,
+#custom-bgapp2.empty,
+#custom-bgapp3.empty,
+#custom-bgapp4.empty,
+#custom-bgapp5.empty,
+#custom-bgapp6.empty,
+#custom-bgapp7.empty,
+#custom-bgapp8.empty {
+	min-width: 0;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: transparent;
+	opacity: 0;
+}

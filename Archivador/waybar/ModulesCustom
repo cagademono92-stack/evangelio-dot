@@ -1,0 +1,395 @@
+//* ---- 💫 https://github.com/JaKooLit 💫 ---- *//
+/* Waybar Modules - Custom Modules */
+/* Basically created to reduce the lines in Waybar Modules bank */
+/* NOTE: This is only for Custom Modules */
+/* Custom Modules like weather browser, tty, file manager at the beginning */
+
+{
+// Apps en segundo plano (bgapps.sh)
+// Leader del drawer: muestra el recuento de apps minimizadas.
+// Clic izquierdo: manda la ventana activa a segundo plano.
+// Clic derecho: restaura TODAS.
+"custom/bgapps": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh status",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh hide",
+	"on-click-right": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore-all",
+	"on-click-middle": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh hide-all",
+	"tooltip": true,
+},
+// Slots del drawer: un módulo por posición. Muestran la app minimizada nº N
+// y con un clic la restauran al workspace original.
+"custom/bgapp1": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 1",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 1",
+	"tooltip": true,
+},
+"custom/bgapp2": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 2",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 2",
+	"tooltip": true,
+},
+"custom/bgapp3": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 3",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 3",
+	"tooltip": true,
+},
+"custom/bgapp4": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 4",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 4",
+	"tooltip": true,
+},
+"custom/bgapp5": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 5",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 5",
+	"tooltip": true,
+},
+"custom/bgapp6": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 6",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 6",
+	"tooltip": true,
+},
+"custom/bgapp7": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 7",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 7",
+	"tooltip": true,
+},
+"custom/bgapp8": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh slot 8",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/bgapps.sh restore 8",
+	"tooltip": true,
+},
+
+"custom/weather": {
+	"format": "{}",
+	"format-alt": "{alt}: {}",
+	"format-alt-click": "click",
+	"interval": 3600,
+	"return-type": "json",
+	"exec": "$HOME/.config/hypr/UserScripts/Weather.py",
+	//"exec": "$HOME/.config/hypr/UserScripts/Weather.sh",
+	//"exec-if": "ping wttr.in -c1",
+	"tooltip": true,
+},
+
+"custom/file_manager": {
+	"format": " ",
+	"on-click": "xdg-open . &",
+	"tooltip": true,
+	"tooltip-format": "File Manager",
+},
+
+"custom/tty": {
+	"format": " ",
+	"on-click": "$HOME/.config/hypr/scripts/WaybarScripts.sh --term",
+	"tooltip": true,
+	"tooltip-format": "Launch Terminal",
+},
+
+"custom/browser": {
+	"format": " ",
+	"on-click": "xdg-open https://",
+	"tooltip": true,
+	"tooltip-format": "Launch Browser",
+},
+
+"custom/settings": {
+	"format": " ",
+	"on-click": "$HOME/.config/hypr/scripts/Kool_Quick_Settings.sh",
+	"tooltip": true,
+	"tooltip-format": "Launch KooL Hyprland Settings Menu",
+},
+
+"custom/cycle_wall": {
+	"format": " ",
+	"on-click": "pkill rofi || rofi -show wallpaper -modi \"drun#wallpaper:$HOME/.config/hypr/hyprland/scripts/RofiWallpaperMode.sh\" -theme-str 'listview { columns: 4; lines: 2; spacing: 12px; layout: vertical; fixed-columns: true; } element { orientation: vertical; padding: 12px; } element-icon { size: 9em; margin: 6px 0px 2px 0px; } element-text { horizontal-align: 0.5; }'",
+	"on-click-right": "$HOME/.config/hypr/hyprland/scripts/wallpaper.sh",
+	"on-click-middle": "$HOME/.config/hypr/scripts/WaybarStyles.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Wallpaper Menu\nMiddle Click: Random wallpaper\nRight Click: Waybar Styles Menu",
+},
+
+"custom/hint": {
+	"format": "󰺁 HINT!",
+	"on-click": "$HOME/.config/hypr/scripts/KeyHints.sh",
+	"on-click-right": "$HOME/.config/hypr/scripts/KeyBinds.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Quick Tips\nRight Click: Keybinds",
+},
+
+"custom/dot_update": {
+	"format": " 󰁈 ",
+	"on-click": "$HOME/.config/hypr/scripts/KooLsDotsUpdate.sh",
+	"tooltip": true,
+	"tooltip-format": "Check KooL Dots update\nIf available",
+},
+
+// Hypridle inhibitor
+"custom/hypridle": {
+	"format": "󱫗 ",
+	"return-type": "json",
+	"escape": true,
+	"exec-on-event": true,
+	"interval": 60,
+	"exec": "$HOME/.config/hypr/scripts/Hypridle.sh status",
+	"on-click": "$HOME/.config/hypr/scripts/Hypridle.sh toggle",
+	"on-click-right": "hyprlock"
+},
+
+"custom/keyboard": {
+	"exec": "cat $HOME/.cache/kb_layout",
+	"interval": 1,
+	"format": " {}",
+	"on-click": "$HOME/.config/hypr/scripts/SwitchKeyboardLayout.sh",
+},
+
+"custom/light_dark": {
+	"format": "󰔎 ",
+	"on-click": "$HOME/.config/hypr/scripts/DarkLight.sh",
+	"on-click-right": "$HOME/.config/hypr/scripts/WaybarStyles.sh",
+	"on-click-middle": "pkill rofi || rofi -show wallpaper -modi \"drun#wallpaper:$HOME/.config/hypr/hyprland/scripts/RofiWallpaperMode.sh\"",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Switch Dark-Light Themes\nMiddle Click: Wallpaper Menu\nRight Click: Waybar Styles Menu",
+},
+
+"custom/lock": {
+	"format": "󰌾",
+	"on-click": "$HOME/.config/hypr/scripts/LockScreen.sh",
+	"tooltip": true,
+	"tooltip-format": "󰷛 Screen Lock",
+},
+
+"custom/menu": {
+	"format": "  ",
+	"on-click": "pkill rofi || rofi -show drun -modi drun#run#filebrowser#window#wallpaper:$HOME/.config/hypr/hyprland/scripts/RofiWallpaperMode.sh",
+	"on-click-middle": "pkill rofi || rofi -show wallpaper -modi \"drun#wallpaper:$HOME/.config/hypr/hyprland/scripts/RofiWallpaperMode.sh\"",
+	"on-click-right": "$HOME/.config/hypr/scripts/WaybarLayout.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Rofi Menu\nMiddle Click: Wallpaper Menu\nRight Click: Waybar Layout Menu",
+},
+
+// Selector de temas (waybar + rofi) — script propio
+"custom/themes": {
+	"format": "󰨔 ",
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/WaybarThemeSwitch.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Elegir tema (waybar + rofi)",
+},
+// This is a custom cava visualizer
+"custom/cava_mviz": {
+	"exec": "$HOME/.config/hypr/scripts/WaybarCava.sh",
+	"format": "{}"
+},
+
+"custom/playerctl": {
+	"format": "<span>{}</span>",
+	"return-type": "json",
+	"max-length": 25,
+	"exec": "playerctl -a metadata --format '{\"text\": \"{{artist}}  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+	"on-click-middle": "playerctl play-pause",
+	"on-click": "playerctl previous",
+	"on-click-right": "playerctl next",
+	"scroll-step": 5.0,
+	"on-scroll-up": "$HOME/.config/hypr/scripts/Volume.sh --inc",
+	"on-scroll-down": "$HOME/.config/hypr/scripts/Volume.sh --dec",
+	"smooth-scrolling-threshold": 1,
+},
+    
+"custom/power": {
+	"format": " ⏻ ",
+	"on-click": "pkill nwg-bar || nwg-bar",
+	"on-click-right": "$HOME/.config/hypr/scripts/ChangeBlur.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Power Menu (nwg-bar)\nRight Click: Change Blur",
+},
+
+"custom/display": {
+	"format": "󰍹",
+	"on-click": "pkill nwg-displays || nwg-displays",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Display Settings (resolution, refresh rate, scale)",
+},
+
+"custom/reboot": {
+    "format": "󰜉",
+    "on-click": "systemctl reboot",
+    "tooltip": true,
+	"tooltip-format": "Left Click: Reboot",
+},
+    
+"custom/quit": {
+    "format": "󰗼",
+    "on-click": "hyprctl dispatch exit",
+    "tooltip": true,
+	"tooltip-format": "Left Click: Exit Hyprland",
+},
+
+"custom/swaync": {
+	"tooltip": true,
+	"tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
+	"format": "{} {icon} ",
+	"format-icons": {
+		"notification": "<span foreground='red'><sup></sup></span>",
+		"none": "",
+		"dnd-notification": "<span foreground='red'><sup></sup></span>",
+		"dnd-none": "",
+		"inhibited-notification": "<span foreground='red'><sup></sup></span>",
+		"inhibited-none": "",
+		"dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+		"dnd-inhibited-none": ""
+	},
+	"return-type": "json",
+	"exec-if": "which swaync-client",
+	"exec": "swaync-client -swb",
+	"on-click": "sleep 0.1 && swaync-client -t -sw",
+	"on-click-right": "swaync-client -d -sw",
+	"escape": true,
+},
+// NOTE:! This is mainly for Arch and Arch Based Distros  depend: pacman-contrib
+// Other Distro dont have notifications but can use to check for update for any other distro
+"custom/updater": {
+	"format": " {}",
+	"exec": "checkupdates | wc -l",
+	"exec-if": "[[ $(checkupdates | wc -l) ]]",
+	"interval": 43200, // (Arch Linux will try to check 12 hrs interval only
+	"on-click": "$HOME/.config/hypr/scripts/Distro_update.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Update System\nArch (w/ notification)\nFedora, OpenSuse, Debian/Ubuntu click to update",
+},
+// Separators
+"custom/separator#dot": {
+	"format": "",
+	"interval": "once",
+	"tooltip": false
+},
+"custom/separator#dot-line": {
+	"format": "",
+	"interval": "once",
+	"tooltip": false
+},
+"custom/separator#line": {
+	"format": "|",
+	"interval": "once",
+	"tooltip": false
+},
+"custom/separator#blank": {
+	"format": "",
+	"interval": "once",
+	"tooltip": false
+},
+"custom/separator#blank_2": {
+	"format": "  ",
+	"interval": "once",
+	"tooltip": false
+},
+"custom/separator#blank_3": {
+	"format": "   ",
+	"interval": "once",
+	"tooltip": false
+},
+// Temperatura de la GPU dedicada (AMD/NVIDIA) vía script.
+// Sin GPU dedicada el script devuelve json con class "hidden" (CSS lo oculta).
+"custom/gpu_temp": {
+	"format": "{}",
+	"return-type": "json",
+	"exec": "$HOME/.config/hypr/hyprland/scripts/gpu-temp.sh",
+	"interval": 10,
+	"tooltip": true,
+},
+"custom/arrow1": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow2": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow3": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow4": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow5": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow6": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow7": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow8": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow9": {
+	"format": "",
+	"tooltip": false
+},
+
+"custom/arrow10": {
+	"format": "",
+	"tooltip": false
+},
+
+// Conky: clic para mostrar/ocultar el widget de sistema
+"custom/conky": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 2,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/conky-toggle.sh status",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/conky-toggle.sh toggle",
+	"on-click-right": "pkill conky",
+	"tooltip": true,
+},
+}

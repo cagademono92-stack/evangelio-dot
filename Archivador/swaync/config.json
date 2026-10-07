@@ -1,0 +1,88 @@
+{
+	"$schema": "https://raw.githubusercontent.com/ErikReider/SwayNotificationCenter/main/data/swaync-config.schema.json",
+	"positionX": "right",
+	"control-center-positionX": "right",
+	"control-center-positionY": "top",
+	"positionY": "top",
+	"layer": "overlay",
+	"control-center-margin-top": 62,
+	"control-center-margin-bottom": 12,
+	"control-center-margin-right": 12,
+	"control-center-margin-left": 12,
+	"control-center-width": 400,
+	"control-center-height": 460,
+	"fit-to-screen": false,
+	"notification-window-width": 380,
+	"notification-grouping": false,
+	"relative-timestamps": true,
+	"keyboard-shortcuts": true,
+	"image-visibility": "when-available",
+	"transition-time": 200,
+	"hide-on-clear": false,
+	"hide-on-action": true,
+	"timeout": 10,
+	"timeout-low": 5,
+	"timeout-critical": 0,
+
+	"widgets": [
+		"dnd",
+		"buttons-grid",
+		"mpris",
+		"volume",
+		"title",
+		"notifications"
+	],
+
+	"widget-config": {
+		"dnd": {
+			"text": "No Molestar"
+		},
+
+		"buttons-grid": {
+			"buttons-per-row": 5,
+			"actions": [
+				{
+					"label": "⏻",
+					"command": "pkill nwg-bar || nwg-bar"
+				},
+				{
+					"label": "󰌾",
+					"command": "$HOME/.config/hypr/scripts/LockScreen.sh"
+				},
+				{
+					"label": "",
+					"command": "$HOME/.config/hypr/scripts/AirplaneMode.sh"
+				},
+				{
+					"label": "󰝟",
+					"command": "$HOME/.config/hypr/scripts/Volume.sh --toggle"
+				},
+				{
+					"label": "",
+					"command": "blueman-manager"
+				}
+			]
+		},
+
+		"mpris": {
+			"image-size": 72,
+			"image-radius": 12,
+			"autohide": true
+		},
+
+		"volume": {
+			"label": "󰕾",
+			"show-per-app": true
+		},
+
+		"title": {
+			"text": "Centro de Notificaciones",
+			"clear-all-button": true,
+			"button-text": "Limpiar"
+		},
+
+		"notifications": {
+			"vexpand": false
+		}
+	}
+}

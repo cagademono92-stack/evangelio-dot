@@ -1,0 +1,225 @@
+/* ---- 🌴 https://github.com/JaKooLit 🌴 ---- */
+/* Tema "vaporwave" — launcher lateral izquierdo synthwave: morado profundo,
+   neón rosa/cián y glow. Combina con la barra [LEFT] Vaporwave. */
+
+/* ---- Configuración ---- */
+configuration {
+    modi:                       "drun,run,filebrowser";
+    show-icons:                 true;
+    display-drun:               "󰀻 ";
+    display-run:                "󰀻 ";
+    display-filebrowser:        "󰀻 ";
+    display-window:             "󰋐 ";
+    drun-display-format:        "{name}";
+    hover-select:               true;
+}
+
+/* ---- Carga colores wallust (dinámicos según wallpaper) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Mapeo semántico al wallpaper ---- */
+* {
+    selected:                   @color10;
+    active:                     @color3;
+    text-selected:              @background;
+    urgent:                     @color9;
+    border-color:               @color10;
+}
+
+/* ---- Window: panel lateral izquierdo ---- */
+window {
+    width:                      460px;
+    x-offset:                   14px;
+    y-offset:                   12px;
+    spacing:                    0px;
+    padding:                    0px;
+    margin:                     0px;
+    border:                     1px;
+    border-color:               @border-color;
+    cursor:                     "default";
+    location:                   northwest;
+    anchor:                     northwest;
+    fullscreen:                 false;
+    enabled:                    true;
+    border-radius:              20px;
+    background-color:           @background-color;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    12px;
+    children:                   [ "inputbar", "listbox" ];
+    border-radius:              18px;
+}
+
+/* ---- Listbox ---- */
+listbox {
+    spacing:                    4px;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+    padding:                    6px;
+    border-radius:              14px;
+    border:                     1px;
+    border-color:               @background-alt;
+    background-color:           @background;
+}
+
+/* ---- Inputbar ---- */
+inputbar {
+    enabled:                    true;
+    text-color:                 @foreground;
+    spacing:                    10px;
+    border-radius:              14px;
+    border:                     1px;
+    border-color:               @border-color;
+    background-color:           @background;
+    children:                   [ "mode-switcher", "textbox-prompt-colon", "entry" ];
+    padding:                    0px 10px 0px 10px;
+    margin-bottom:              10px;
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    padding:                    10px 0px 10px 10px;
+    expand:                     false;
+    str:                        "󰀼 ";
+    text-color:                 @selected;
+    background-color:           transparent;
+}
+
+entry {
+    enabled:                    true;
+    padding:                    10px 0px 10px 0px;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "  Sintetizar…";
+    background-color:           @background;
+}
+
+mode-switcher {
+    enabled:                    true;
+    spacing:                    8px;
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+button {
+    padding:                    8px 14px 8px 14px;
+    border-radius:             12px;
+    background-color:          @background;
+    text-color:                @foreground;
+    cursor:                    pointer;
+    border:                    0px;
+}
+
+button selected {
+    background-color:          @selected;
+    text-color:                @text-selected;
+    border:                    0px;
+}
+
+/* ---- Listview: una columna ---- */
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      8;
+    spacing:                    4px;
+    padding:                    4px;
+    dynamic:                    true;
+    cycle:                      true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              false;
+    background-color:           transparent;
+    border-radius:              12px;
+    border:                     0px;
+}
+
+scrollbar {
+    border:                     0px;
+    border-radius:              8px;
+    background-color:           transparent;
+    handle-color:               @active;
+    handle-width:               2px;
+    padding:                    0;
+}
+
+/* ---- Element ---- */
+element {
+    enabled:                    true;
+    padding:                    10px 12px 10px 12px;
+    margin:                     2px 0px;
+    cursor:                     pointer;
+    background-color:           transparent;
+    border-radius:             12px;
+    border:                     0px;
+}
+
+element normal.normal {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element normal.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-text selected,
+element selected.normal {
+    background-color:           @selected;
+    text-color:                 @text-selected;
+}
+
+element selected.urgent {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element selected.active {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 inherit;
+    size:                       24px;
+    cursor:                     inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0;
+}
+
+message {
+    background-color:           transparent;
+    border:                     0px;
+}
+
+textbox {
+    padding:                     10px;
+    border-radius:              12px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+error-message {
+    padding:                     12px;
+    border-radius:               12px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}

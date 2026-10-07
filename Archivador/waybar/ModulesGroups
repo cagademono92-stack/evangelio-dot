@@ -1,0 +1,160 @@
+//* ---- 💫 https://github.com/JaKooLit 💫 ---- *//
+/* Waybar Modules - Groups Modules */
+/* Basically created to reduce the lines in Waybar Modules bank */
+/* NOTE: This is only for Groups */
+
+{
+// GROUPS
+// Apps en segundo plano: el primer módulo (custom/bgapps) es el "group leader"
+// que siempre se muestra; los demás se despliegan al pasar el cursor.
+"group/bgapps": {
+	"orientation": "horizontal",
+	"drawer": {
+		"transition-duration": 400,
+		"children-class": "bgapp-slot",
+		"transition-left-to-right": true
+	},
+	"modules": [
+		"custom/bgapps",
+		"custom/bgapp1",
+		"custom/bgapp2",
+		"custom/bgapp3",
+		"custom/bgapp4",
+		"custom/bgapp5",
+		"custom/bgapp6",
+		"custom/bgapp7",
+		"custom/bgapp8",
+	]
+},
+"group/app_drawer": {
+	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "custom/menu",
+		"transition-left-to-right": true
+        },
+	"modules": [
+		"custom/menu",
+		"custom/light_dark",
+		"custom/file_manager",
+		"custom/tty",
+		"custom/browser",
+		"custom/settings",
+	]
+},
+"group/motherboard": {
+	"orientation": "horizontal",
+	"modules": [
+		"cpu",
+		"power-profiles-daemon",
+		"memory",
+		"temperature",
+		"disk",
+	]
+},
+
+"group/mobo_drawer": {
+	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "cpu",
+		"transition-left-to-right": true
+        },
+	"modules": [
+		"temperature",		
+		"cpu",
+		"power-profiles-daemon",	
+		"memory",
+		"disk",
+	]
+},
+"group/laptop": {
+	"orientation": "inherit",
+	"modules": [
+		"backlight",
+		"battery",
+	]
+},
+"group/audio": {
+	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "pulseaudio",
+		"transition-left-to-right": true
+        },
+	"modules": [
+		"pulseaudio",
+		"pulseaudio#microphone",
+	]
+},
+
+"group/connections": {
+	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "bluetooth",
+		"transition-left-to-right": true
+        },
+	"modules": [
+		"network",
+		"bluetooth",
+	]
+},
+
+"group/status": {
+	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "custom/power",
+		"transition-left-to-right": false
+        },
+	"modules": [
+		"custom/power",
+		"custom/lock",
+		"keyboard-state",
+		"custom/keyboard",
+	]
+},
+"group/notify": {
+	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "custom/swaync",
+		"transition-left-to-right": false
+        },
+	"modules": [
+		"custom/swaync",
+		"custom/dot_update",
+	]
+},
+
+"group/power": {
+    "orientation": "inherit",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "drawer-child",
+        "transition-left-to-right": false
+      },
+    "modules": [
+        "custom/power",
+        "custom/quit",
+        "custom/lock",
+        "custom/reboot"
+      ]
+},
+// groups for vertical
+"group/power#vert": {
+     "orientation": "inherit",
+     "drawer": {
+        "transition-duration": 300,
+        "children-class": "not-memory",
+        "transition-left-to-right": false
+       },
+     "modules": [
+        "custom/power",
+        "custom/lock",
+        "custom/logout",
+        "custom/reboot"
+      ]
+},
+}

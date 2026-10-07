@@ -1,0 +1,33 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "gruvbox" — basado en la config principal de rofi (KooL_style-5) */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"
+
+/* ---- Paleta "gruvbox" ---- */
+* {
+	background:            #282828;
+	background-color:      #282828;
+	background-alt:        #504945;
+	foreground:            #ebdbb2;
+	selected:              #b8bb26;
+	active:                #fabd2f;
+	text-selected:         #282828;
+	urgent:                #fb4934;
+
+	color0:  #282828;
+	color1:  #504945;
+	color2:  #b8bb26;
+	color3:  #fabd2f;
+	color4:  #b8bb26;
+	color5:  #fb4934;
+	color6:  #504945;
+	color7:  #ebdbb2;
+	color8:  #3c3836;
+	color9:  #fb4934;
+	color10: #b8bb26;
+	color11: #fabd2f;
+	color12: #b8bb26;
+	color13: #b8bb26;
+	color14: #fabd2f;
+	color15: #ebdbb2;
+}

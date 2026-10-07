@@ -1,0 +1,46 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+// ### [BOTTOM] Dock Flotante ### //
+// Dock inferior centrado: una píldora flotante pegada al borde inferior.
+
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules",
+  ],
+"layer": "top",
+"position": "bottom",
+"width": 1240,
+"margin-bottom": 8,
+
+"modules-left": [
+	"group/bgapps",
+	"clock",  
+	"custom/weather", 
+	"cpu",
+	"memory",
+	"temperature#cpu",
+	"custom/gpu_temp",
+	],
+
+"modules-center": [
+	"hyprland/workspaces#roman"
+	],
+
+"modules-right": [
+	"custom/menu", 
+	"custom/themes",
+	"tray",
+	"group/notify",
+	"mpris", 
+	"network", 
+	"bluetooth", 
+	"backlight", 
+	"custom/display",
+	"pulseaudio", 
+	"battery", 
+	"custom/power"],
+}

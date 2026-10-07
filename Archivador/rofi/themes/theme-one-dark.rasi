@@ -1,0 +1,33 @@
+/* ---- 💝 https://github.com/JaKooLit 💝 ---- */
+/* Tema "one-dark" — basado en la config principal de rofi (KooL_style-5) */
+
+@theme "~/.config/rofi/theme/KooL_style-5.rasi"
+
+/* ---- Paleta "one-dark" ---- */
+* {
+	background:            #282c34;
+	background-color:      #282c34;
+	background-alt:        #353a45;
+	foreground:            #abb2bf;
+	selected:              #61afef;
+	active:                #c678dd;
+	text-selected:         #282c34;
+	urgent:                #e06c75;
+
+	color0:  #282c34;
+	color1:  #353a45;
+	color2:  #61afef;
+	color3:  #c678dd;
+	color4:  #61afef;
+	color5:  #e06c75;
+	color6:  #353a45;
+	color7:  #abb2bf;
+	color8:  #3b4048;
+	color9:  #e06c75;
+	color10: #61afef;
+	color11: #c678dd;
+	color12: #61afef;
+	color13: #61afef;
+	color14: #c678dd;
+	color15: #abb2bf;
+}
