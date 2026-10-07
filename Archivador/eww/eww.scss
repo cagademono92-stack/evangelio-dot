@@ -48,3 +48,15 @@ window { background-color: transparent; }
   color: rgba(255, 255, 255, 0.75);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
+
+.weather {
+  background-color: rgba($surface, 0.75);
+  border-radius: 18px;
+  padding: 10px 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+.weather-text {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  color: $on-surface;
+}

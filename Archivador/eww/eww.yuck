@@ -37,3 +37,17 @@
 
 (defpoll bigtime :interval "1s" "date '+%H:%M'")
 (defpoll bigdate :interval "60s" "date '+%A, %d %B'")
+
+(defwindow weather
+  :monitor 0
+  :geometry (geometry :x "16" :y "14" :width "220" :height "64" :anchor "bottom left")
+  :stacking "background"
+  :exclusive false
+  :focusable false
+  (weather_widget))
+
+(defwidget weather_widget []
+  (box :class "weather" :halign "center" :valign "center"
+    (label :class "weather-text" :text {weather} :halign "center")))
+
+(defpoll weather :interval "900s" "bash $HOME/.config/eww/weather.sh")

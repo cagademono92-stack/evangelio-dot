@@ -43,6 +43,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("eww daemon")
     hl.exec_cmd("sleep 1 && eww open music")
     hl.exec_cmd("sleep 1 && eww open clock")
+    hl.exec_cmd("sleep 2 && eww open weather")
     hl.exec_cmd("bash $HOME/.config/eww/cava-eww.sh")
    -- Necesario para que xdg-desktop-portal (y Discord screen share) funcione en Wayland
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_TYPE=wayland DISPLAY") 
