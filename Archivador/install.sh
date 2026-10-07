@@ -50,6 +50,14 @@ THEME_PKGS=(
 	matugen
 	waypaper
 )
+# Paquetes que SIEMPRE vienen de AUR (el resto es oficial de pacman/extra)
+AUR_PKGS=(
+	matugen
+	waypaper
+	gpu-screen-recorder
+	hyprpolkitagent
+	ttf-jetbrains-mono-nerd
+)
 # Resto de utilidades que usan tus keybinds y scripts
 EXTRA_PKGS=(
 	hyprlock
@@ -95,7 +103,12 @@ read -rp "¿Instalar todo esto con yay? [S/n] " confirm
 if [[ "$confirm" =~ ^[Nn]$ ]]; then
 	echo "Instalación de paquetes cancelada. Seguimos solo con la copia de config."
 else
-	yay -S --needed --noconfirm "${CORE_PKGS[@]}" "${THEME_PKGS[@]}" "${EXTRA_PKGS[@]}"
+	OFFICIAL_PKGS=("${CORE_PKGS[@]}" "${THEME_PKGS[@]}" "${EXTRA_PKGS[@]}")
+	for a in "${AUR_PKGS[@]}"; do
+		OFFICIAL_PKGS=("${OFFICIAL_PKGS[@]/$a}")
+	done
+	sudo pacman -S --needed --noconfirm "${OFFICIAL_PKGS[@]}"
+	yay -S --needed --noconfirm "${AUR_PKGS[@]}"
 fi
 
 echo ""
@@ -170,7 +183,7 @@ mkdir -p "$BACKUP_DIR"
 for dir in "${FOLDERS[@]}"; do
 	if [ -d "$CONFIG_DIR/$dir" ]; then
 		echo "Backup: $CONFIG_DIR/$dir -> $BACKUP_DIR/$dir"
-		cp -r "$CONFIG_DIR/$dir" "$BACKUP_DIR/$dir"
+		mv "$CONFIG_DIR/$dir" "$BACKUP_DIR/$dir"
 	fi
 done
 echo "Backup completo en: $BACKUP_DIR"

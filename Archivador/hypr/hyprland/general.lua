@@ -21,8 +21,6 @@ hl.gesture({
     direction = "horizontal",
     action = "workspace"
 })
--- Los gestos de 4 dedos arriba/abajo llamaban al overview de Quickshell
--- (quickshell:overviewWorkspacesToggle). Sin Quickshell no hay overview
 -- nativo equivalente en Hyprland puro. Si en algún momento instalás el
 -- plugin hyprexpo (yay -S hyprland-plugins && hyprpm enable hyprexpo),
 -- podés reactivarlos así:

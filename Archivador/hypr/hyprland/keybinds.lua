@@ -15,47 +15,31 @@ local rofiLauncher = 'rofi -show drun -modi "drun#run#filebrowser#' .. rofiWallp
 local rofiWallpaperPicker = 'rofi -show wallpaper -modi "drun#' .. rofiWallpaperMode ..
 	'" -theme-str \'listview { columns: 4; lines: 2; spacing: 12px; layout: vertical; fixed-columns: true; } element { orientation: vertical; padding: 12px; } element-icon { size: 9em; margin: 6px 0px 2px 0px; } element-text { horizontal-align: 0.5; }\''
 
--- Antes acá se chequeaba si Quickshell estaba vivo (qsIsAlive) para decidir
--- si usar sus funciones o caer a un fallback. Como ya no usamos Quickshell,
--- dejamos esta variable siempre en "false" para que TODOS los binds de abajo
--- que hacían "qsIsAlive || comando_de_respaldo" sigan funcionando igual,
--- sin tener que tocar cada línea una por una.
+-- qsIsAlive se deja en "false": antes pesaba en si usar Quickshell o fallback.
 local qsIsAlive = "false"
 
 hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(qsIsAlive .. " || pkill rofi || " .. rofiLauncher), { description = "App: Launcher (Rofi)" })
 hl.bind("SUPER + SUPER_R", hl.dsp.exec_cmd(qsIsAlive .. " || pkill rofi || " .. rofiLauncher))
 
--- [removido] SUPER_L/R workspaceNumber: overlay de Quickshell que mostraba el
 -- número de escritorio al mantener SUPER. No hay equivalente nativo en
--- Hyprland sin Quickshell.
 
--- [removido] SUPER+Tab overviewWorkspacesToggle: overview de Quickshell.
--- Alternativa real: plugin hyprexpo (ver comentario en general.lua).
 
--- [removido] SUPER+V overviewClipboardToggle y SUPER+Period overviewEmojiToggle:
 -- eran duplicados de los binds de portapapeles/emoji que ya están más abajo
 -- con fallback funcional (cliphist+fuzzel / fuzzel-emoji.sh).
 
--- [removido] SUPER+A / SUPER+ALT+A / SUPER+B / SUPER+O sidebarLeftToggle(Detach):
--- sidebar izquierdo de Quickshell, sin reemplazo directo.
 
 -- Notificaciones: reemplazado por swaync (nuestro centro de notificaciones real)
 hl.bind("SUPER + N", hl.dsp.exec_cmd("swaync-client -t -sw"), { description = "Shell: Toggle notification center" })
 
--- [removido] SUPER+Slash cheatsheetToggle: sin reemplazo.
 
 -- On-screen keyboard: requiere tener wvkbd instalado (yay -S wvkbd)
 hl.bind("SUPER + K", hl.dsp.exec_cmd("pkill wvkbd-mobintl || wvkbd-mobintl"), { description = "Utilities: Toggle on-screen keyboard" })
 
--- Controles de medios: reusamos el widget mpris de swaync en vez del popup de Quickshell
 hl.bind("SUPER + M", hl.dsp.exec_cmd("swaync-client -t -sw"), { description = "Media: Toggle media controls" })
 
--- [removido] SUPER+G overlayToggle: overlay de widgets de Quickshell, sin reemplazo.
 
--- Menú de sesión/power: nwg-bar en vez del session menu de Quickshell
 hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("pkill nwg-bar || nwg-bar"), { description = "Session: Power menu" })
 
--- [removido] SHIFT+SUPER+ALT+Slash welcome.qml: pantalla de bienvenida de Quickshell.
 
 hl.bind(
 	"XF86MonBrightnessUp",
@@ -91,17 +75,13 @@ hl.bind(
 	{ description = "Shell: Random wallpaper" }
 )
 
--- [removido] CTRL+SUPER+SHIFT+D toggleLightDark: motor de temas claro/oscuro
--- de Quickshell (Material You), sin equivalente en el setup actual.
 
--- Reiniciar los componentes del "shell" (ahora: waybar + swaync, no Quickshell)
 hl.bind(
 	"CTRL + SUPER + R",
 	hl.dsp.exec_cmd("killall waybar swaync; waybar & swaync &"),
 	{ description = "Shell: Restart bar/notifications" }
 )
 
--- [removido] CTRL+SUPER+P panelFamilyCycle: exclusivo de Quickshell.
 
 --##! Utilities
 --# Screenshot, Record, OCR, Color picker, Clipboard history
@@ -132,7 +112,6 @@ hl.bind(
 	),
 	{ description = "Utilities: Character recognition >> clipboard" }
 )
--- [removido] SUPER+SHIFT+T screenTranslate: sin equivalente sin Quickshell.
 
 --# Color picker
 hl.bind(
