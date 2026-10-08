@@ -32,6 +32,8 @@
 
 "modules-right": [
 	"custom/themes",
+	"custom/conky",
+	"custom/quicksettings",
 	"tray",
 	"group/notify",
 	"mpris", 
