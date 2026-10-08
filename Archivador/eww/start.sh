@@ -6,4 +6,5 @@ for i in $(seq 1 20); do
 	sleep 0.5
 done
 eww open music
+eww open weather
 eww open clock
