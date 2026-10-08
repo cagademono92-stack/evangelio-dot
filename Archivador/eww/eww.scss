@@ -60,3 +60,42 @@ window { background-color: transparent; }
   font-size: 16px;
   color: $on-surface;
 }
+
+.qs {
+  background-color: rgba($surface, 0.92);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+}
+.qs-title {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  font-weight: bold;
+  color: $primary;
+  margin-bottom: 10px;
+}
+.qs-toggle {
+  background-color: rgba($primary, 0.2);
+  color: $primary;
+  border-radius: 12px;
+  padding: 8px 14px;
+  border: none;
+  font-size: 16px;
+  &:hover { background-color: rgba($primary, 0.4); }
+}
+.qs-label {
+  color: $on-surface;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  margin-top: 8px;
+}
+.qs-scale trough {
+  background-color: rgba($on-surface, 0.15);
+  border-radius: 6px;
+  min-height: 6px;
+}
+.qs-scale highlight {
+  background-color: $primary;
+  border-radius: 6px;
+  min-height: 6px;
+}

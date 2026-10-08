@@ -51,3 +51,36 @@
     (label :class "weather-text" :text {weather} :halign "center")))
 
 (defpoll weather :interval "900s" "bash $HOME/.config/eww/weather.sh")
+
+(defwindow qs
+  :monitor 0
+  :geometry (geometry :x "12" :y "50" :width "300" :height "380" :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable true
+  (qs_panel))
+
+(defwidget qs_panel []
+  (box :class "qs" :orientation "vertical" :space-evenly false :halign "fill" :valign "fill"
+    (label :class "qs-title" :text "Ajustes rápidos" :halign "start")
+    (box :class "qs-row" :orientation "horizontal"
+      (button :class "qs-toggle" :onclick "nmcli radio wifi on || nmcli radio wifi off" "{wifi_icon}")
+      (button :class "qs-toggle" :onclick "bluetoothctl power off || bluetoothctl power on" "{bt_icon}")
+      (button :class "qs-toggle" :onclick "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" "{mic_mute}"))
+    (label :class "qs-label" :text "🔊  Volumen" :halign "start")
+    (scale :class "qs-scale" :value {qs_vol} :max 100 :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%")
+    (label :class "qs-label" :text "🎤  Micrófono" :halign "start")
+    (scale :class "qs-scale" :value {qs_mic} :max 100 :onchange "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ $value%")
+    (label :class "qs-label" :text "☀  Brillo" :halign "start")
+    (scale :class "qs-scale" :value {qs_bright} :max 100 :onchange "brightnessctl set $value%")
+    (label :class "qs-label" :text {media} :halign "start")))
+
+(defpoll qs_vol :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf int($2*100)}'")
+(defpoll qs_mic :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{printf int($2*100)}'")
+(defpoll qs_bright :interval "2s" "brightnessctl | awk -F'[()]' '/Current brightness/{gsub(/%/,\"\",$2); print $2}'")
+(defpoll wifi_icon :interval "3s" "nmcli radio wifi | grep -q enabled && echo '' || echo '⚠'")
+(defpoll bt_icon :interval "3s" "bluetoothctl show | grep -q 'Powered: yes' && echo '' || echo '⚠'")
+(defpoll mic_mute :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo '🔇' || echo '🎤'")
+(defpoll media :interval "3s" "playerctl metadata title 2>/dev/null | cut -c1-28 || echo 'Nada sonando'")
+
+(defvar dark_mode false)

@@ -1,8 +1,7 @@
 /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
 
-// ### [TOP] Matrix Code ### //
-// Barra superior estilo Matrix: negro profundo, texto verde fósforo y
-// toques de cian. Imita una terminal/símbolo del sistema.
+// ### [TOP] Segmentado ### //
+// Barra superior donde cada grupo (izq/centro/dcha) es una píldora separada.
 
 {
 "include": [
@@ -14,13 +13,13 @@
   ],
 "layer": "top",
 "position": "top",
-"width": 1200,
-"margin-top": 8,
+"width": 1100,
+"margin-top": 6,
 
 "modules-left": [
 	"custom/menu",
-	"clock",
-	"custom/weather",
+	"clock",  
+	"custom/weather", 
 	"cpu",
 	"memory",
 	"temperature#cpu",
@@ -35,12 +34,12 @@
 	"custom/themes",
 	"tray",
 	"group/notify",
-	"mpris",
-	"network",
-	"bluetooth",
-	"backlight",
+	"mpris", 
+	"network", 
+	"bluetooth", 
+	"backlight", 
 	"custom/display",
-	"pulseaudio",
-	"battery",
+	"pulseaudio", 
+	"battery", 
 	"custom/power"],
 }

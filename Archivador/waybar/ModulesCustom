@@ -392,4 +392,16 @@
 	"on-click-right": "pkill conky",
 	"tooltip": true,
 },
+
+// Panel rápido eww (brillo/volumen/wifi/bt)
+"custom/quicksettings": {
+	"format": "{text}",
+	"return-type": "json",
+	"interval": 3,
+	"exec": "$HOME/.config/hypr/hyprland/scripts/qs-toggle.sh status",
+	"exec-on-event": true,
+	"on-click": "$HOME/.config/hypr/hyprland/scripts/qs-toggle.sh toggle",
+	"tooltip": true,
+},
+
 }
