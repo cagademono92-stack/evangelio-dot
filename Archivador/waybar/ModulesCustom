@@ -381,27 +381,6 @@
 	"tooltip": false
 },
 
-// Conky: clic para mostrar/ocultar el widget de sistema
-"custom/conky": {
-	"format": "{text}",
-	"return-type": "json",
-	"interval": 2,
-	"exec": "$HOME/.config/hypr/hyprland/scripts/conky-toggle.sh status",
-	"exec-on-event": true,
-	"on-click": "$HOME/.config/hypr/hyprland/scripts/conky-toggle.sh toggle",
-	"on-click-right": "pkill conky",
-	"tooltip": true,
-},
 
-// Panel rápido eww (brillo/volumen/wifi/bt)
-"custom/quicksettings": {
-	"format": "{text}",
-	"return-type": "json",
-	"interval": 3,
-	"exec": "$HOME/.config/hypr/hyprland/scripts/qs-toggle.sh status",
-	"exec-on-event": true,
-	"on-click": "$HOME/.config/hypr/hyprland/scripts/qs-toggle.sh toggle",
-	"tooltip": true,
-},
 
 }

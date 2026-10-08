@@ -33,8 +33,6 @@
 "modules-right": [
 	"custom/menu", 
 	"custom/themes",
-	"custom/conky",
-	"custom/quicksettings",
 	"tray",
 	"group/notify",
 	"mpris", 

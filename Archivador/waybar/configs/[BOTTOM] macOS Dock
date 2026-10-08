@@ -41,8 +41,6 @@
 	"pulseaudio",
 	"battery",
 	"custom/themes",
-	"custom/conky",
-	"custom/quicksettings",
 	"group/notify",
 	"tray",
 	"custom/power"],
