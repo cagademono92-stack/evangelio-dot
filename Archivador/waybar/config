@@ -19,7 +19,6 @@
 "modules-left": [
 	"custom/menu",
 	"clock",  
-	"custom/weather", 
 	"cpu",
 	"memory",
 	"temperature#cpu",
