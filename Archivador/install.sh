@@ -1,65 +1,67 @@
 #!/usr/bin/env bash
 #
-# install.sh — instalación automática de yay + dependencias + config.
+# install.sh — instalación 100% automática de evangelio-dot.
 #
 # Uso:
-#   1) Descomprimí el Archivador.zip
-#   2) Dejá este install.sh en la MISMA carpeta que quedó al descomprimir
-#      (o sea: al lado de "hypr", "waybar", "rofi", "swaync", "matugen",
-#      "waypaper", "fish", "kitty", "themes")
-#   3) chmod +x install.sh && ./install.sh
+#   1) Descomprimí Archivador.zip (o cloná el repo)
+#   2) chmod +x install.sh && ./install.sh
 #
-# El script NO tiene hardcodeada la lista de carpetas — copia
-# automáticamente TODAS las carpetas que encuentre al lado suyo. Así no
-# hay que editarlo cada vez que agregás una carpeta nueva a la config.
+# El script NO pregunta nada: instala dependencias, hace backup de tu
+# ~/.config actual y copia la configuración nueva. Al final te dice qué
+# pasos manuales quedan (wallpaper, etc.).
 #
-# Nota sobre ext4: no requiere nada especial por el sistema de archivos —
-# cp/mv funcionan igual en ext4 que en cualquier otro FS de Linux.
+# Soporte: Arch Linux / derivadas (CachyOS, Omarchy, EndeavourOS...)
 
-set -e
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$HOME/.config"
 BACKUP_DIR="$HOME/.config-backup-$(date +%Y%m%d_%H%M%S)"
 
-echo "=== 1/7: Verificando yay ==="
+echo "=== 1/6: Verificando sistema ==="
+if ! command -v pacman &>/dev/null; then
+	echo "ERROR: no se encontró pacman. Este script es para Arch/derivadas." >&2
+	exit 1
+fi
+
+# --- Root para pacman ---
+SUDO=""
+if [ "$(id -u)" -ne 0 ]; then
+	if command -v sudo &>/dev/null; then
+		SUDO="sudo"
+	else
+		echo "ERROR: necesitás sudo o root para instalar paquetes." >&2
+		exit 1
+	fi
+fi
+
+echo ""
+echo "=== 2/6: Verificando yay ==="
 if ! command -v yay &>/dev/null; then
 	echo "yay no está instalado. Instalando desde AUR..."
-	sudo pacman -S --needed --noconfirm git base-devel
+	$SUDO pacman -S --needed --noconfirm git base-devel
 	tmpdir=$(mktemp -d)
 	git clone https://aur.archlinux.org/yay.git "$tmpdir/yay"
 	(cd "$tmpdir/yay" && makepkg -si --noconfirm)
 	rm -rf "$tmpdir"
 else
-	echo "yay ya está instalado, salteando."
+	echo "yay ya está instalado."
 fi
 
 echo ""
-echo "=== 2/7: Instalando dependencias ==="
-# Componentes principales del escritorio
-CORE_PKGS=(
+echo "=== 3/6: Instalando dependencias (automático) ==="
+
+# Paquetes oficiales (pacman)
+OFFICIAL_PKGS=(
+	# Componentes principales del escritorio
 	waybar
 	rofi
 	swaync
 	fish
 	kitty
-)
-# Wallpaper + theming dinámico (el pipeline matugen)
-THEME_PKGS=(
+	# Wallpaper + theming dinámico
 	hyprpaper
-	matugen
-	waypaper
-)
-# Paquetes que SIEMPRE vienen de AUR (el resto es oficial de pacman/extra)
-AUR_PKGS=(
-	matugen
-	waypaper
-	gpu-screen-recorder
-	hyprpolkitagent
-	ttf-jetbrains-mono-nerd
-)
-# Resto de utilidades que usan tus keybinds y scripts
-EXTRA_PKGS=(
+	# Resto de utilidades que usan tus keybinds y scripts
 	hyprlock
 	hypridle
 	nwg-bar
@@ -80,6 +82,9 @@ EXTRA_PKGS=(
 	fuzzel
 	conky
 	eww
+	# Fuentes usadas por waybar/rofi/kitty/eww/conky
+	ttf-jetbrains-mono-nerd
+	noto-fonts-emoji
 	wl-clipboard
 	wtype
 	tesseract
@@ -91,28 +96,25 @@ EXTRA_PKGS=(
 	xdg-desktop-portal
 	xdg-desktop-portal-hyprland
 	hyprpolkitagent
-	# Fuentes usadas por waybar/rofi/kitty/eww/conky
-	ttf-jetbrains-mono-nerd
-	noto-fonts-emoji
 )
 
-echo "Principales:  ${CORE_PKGS[*]}"
-echo "Theming:      ${THEME_PKGS[*]}"
-echo "Utilidades:   ${EXTRA_PKGS[*]}"
-read -rp "¿Instalar todo esto con yay? [S/n] " confirm
-if [[ "$confirm" =~ ^[Nn]$ ]]; then
-	echo "Instalación de paquetes cancelada. Seguimos solo con la copia de config."
-else
-	OFFICIAL_PKGS=("${CORE_PKGS[@]}" "${THEME_PKGS[@]}" "${EXTRA_PKGS[@]}")
-	for a in "${AUR_PKGS[@]}"; do
-		OFFICIAL_PKGS=("${OFFICIAL_PKGS[@]/$a}")
-	done
-	sudo pacman -S --needed --noconfirm "${OFFICIAL_PKGS[@]}"
-	yay -S --needed --noconfirm "${AUR_PKGS[@]}"
-fi
+# Paquetes AUR (yay)
+AUR_PKGS=(
+	matugen
+	waypaper
+	gpu-screen-recorder
+	hyprpolkitagent
+	ttf-jetbrains-mono-nerd
+)
+
+echo "Instalando ${#OFFICIAL_PKGS[@]} paquetes oficiales con pacman..."
+$SUDO pacman -S --needed --noconfirm "${OFFICIAL_PKGS[@]}"
+
+echo "Instalando ${#AUR_PKGS[@]} paquetes AUR con yay..."
+yay -S --needed --noconfirm "${AUR_PKGS[@]}"
 
 echo ""
-echo "=== 3/7: Detectando carpetas de config junto a este script ==="
+echo "=== 4/6: Detectando carpetas de config junto a este script ==="
 FOLDERS=()
 for entry in "$SCRIPT_DIR"/*/; do
 	[ -d "$entry" ] || continue
@@ -120,65 +122,14 @@ for entry in "$SCRIPT_DIR"/*/; do
 done
 
 if [ ${#FOLDERS[@]} -eq 0 ]; then
-	echo "ERROR: no encontré ninguna carpeta al lado de install.sh."
-	echo "¿Lo dejaste junto a hypr/, waybar/, matugen/, etc.?"
+	echo "ERROR: no encontré ninguna carpeta al lado de install.sh." >&2
 	exit 1
 fi
 
 echo "Carpetas encontradas: ${FOLDERS[*]}"
 
 echo ""
-echo "=== 4/7: Verificando que los templates de matugen estén completos ==="
-# matugen falla entero si config.toml apunta a un template que no existe.
-MATUGEN_CFG="$SCRIPT_DIR/matugen/config.toml"
-if [ -f "$MATUGEN_CFG" ]; then
-	missing=0
-	while IFS= read -r tpl; do
-		tpl_name="$(basename "$tpl")"
-		if [ ! -f "$SCRIPT_DIR/matugen/templates/$tpl_name" ]; then
-			echo "  FALTA: matugen/templates/$tpl_name (referenciado en config.toml)"
-			missing=$((missing + 1))
-		else
-			echo "  OK: $tpl_name"
-		fi
-	done < <(grep -oP "input_path\s*=\s*'\K[^']+" "$MATUGEN_CFG")
-
-	if [ "$missing" -gt 0 ]; then
-		echo ""
-		echo "AVISO: faltan $missing template(s). matugen va a fallar al cambiar el wallpaper."
-		read -rp "¿Seguir igual? [s/N] " cont
-		[[ "$cont" =~ ^[Ss]$ ]] || exit 1
-	fi
-else
-	echo "  (no encontré matugen/config.toml, salteando esta verificación)"
-fi
-
-echo ""
-echo "=== 5/7: Verificando que las apps destino de matugen tengan su carpeta ==="
-# Complemento del chequeo anterior, pero al revés: si config.toml escribe a
-# ~/.config/ALGO/colors.css pero la carpeta "ALGO" no vino en este zip,
-# apply-theme.sh va a fallar al reiniciar/recargar esa app. Esto es justo lo
-# que pasó con nwg-bar en una vuelta anterior — se armó el template pero se
-# olvidó de incluir la carpeta nwg-bar/ en el zip.
-if [ -f "$MATUGEN_CFG" ]; then
-	while IFS= read -r out; do
-		# out es del tipo ~/.config/nwg-bar/colors.css -> nos interesa "nwg-bar"
-		rel="${out#\~/.config/}"
-		target_dir="${rel%%/*}"
-		found=0
-		for f in "${FOLDERS[@]}"; do
-			[ "$f" = "$target_dir" ] && found=1 && break
-		done
-		if [ "$found" -eq 0 ]; then
-			echo "  AVISO: config.toml escribe a ~/.config/$target_dir/... pero no hay carpeta '$target_dir/' en este zip."
-			echo "         Si '$target_dir' ya existe en tu ~/.config de antes, no pasa nada."
-			echo "         Si no, agregala al lado de install.sh antes de seguir (o cancelá y la sumás)."
-		fi
-	done < <(grep -oP "output_path\s*=\s*'\K[^']+" "$MATUGEN_CFG")
-fi
-
-echo ""
-echo "=== 6/7: Backup de tu ~/.config actual ==="
+echo "=== 5/6: Backup de tu ~/.config actual ==="
 mkdir -p "$BACKUP_DIR"
 for dir in "${FOLDERS[@]}"; do
 	if [ -d "$CONFIG_DIR/$dir" ]; then
@@ -189,51 +140,53 @@ done
 echo "Backup completo en: $BACKUP_DIR"
 
 echo ""
-echo "=== 7/7: Copiando la config nueva a ~/.config ==="
+echo "=== 6/6: Copiando la config nueva a ~/.config ==="
 for dir in "${FOLDERS[@]}"; do
 	mkdir -p "$CONFIG_DIR/$dir"
 	cp -r "$SCRIPT_DIR/$dir/." "$CONFIG_DIR/$dir/"
 	echo "Copiado: $dir/ -> $CONFIG_DIR/$dir/"
 done
 
-# --- Arreglos post-copia ---
+# --- Arreglos post-copia (automáticos) ---
 
-# waypaper/config.ini tiene rutas absolutas con un nombre de usuario fijo
-# ("/home/receck/..."). Si instalás esto en otra máquina o con otro usuario,
-# esas rutas no existen. Las reescribimos al $HOME real de quien instala.
+# waypaper/config.ini: rutas absolutas con usuario viejo -> $HOME real
 if [ -f "$CONFIG_DIR/waypaper/config.ini" ]; then
-	sed -i "s|$HOME/\.config|$HOME/.config|g; s|/home/[^/]*|$HOME|g" "$CONFIG_DIR/waypaper/config.ini"
+	sed -i "s|/home/[^/]*/\.config|$HOME/.config|g; s|/home/[^/]*|$HOME|g" "$CONFIG_DIR/waypaper/config.ini"
 	echo "Ajustado: rutas de usuario en waypaper/config.ini -> $HOME"
 fi
 
-# fish/config.fish puede traer rutas viejas tipo /home/receck/...
+# fish/config.fish: puede traer rutas viejas tipo /home/receck/...
 if [ -f "$CONFIG_DIR/fish/config.fish" ]; then
-	sed -i "s|$HOME/|$HOME/|g" "$CONFIG_DIR/fish/config.fish"
+	sed -i "s|/home/[^/]*/|$HOME/|g" "$CONFIG_DIR/fish/config.fish"
 	echo "Ajustado: rutas de usuario en fish/config.fish -> $HOME"
 fi
 
-# Rutas absolutas en hyprpaper.conf / hyprlock apuntan al usuario original
-for f in "$CONFIG_DIR/hypr/hyprpaper.conf" "$CONFIG_DIR/hypr/hyprlock/colors.conf" "$CONFIG_DIR/rofi/config.rasi"; do
+# hyprpaper.conf / hyprlock: rutas absolutas al usuario original
+for f in "$CONFIG_DIR/hypr/hyprpaper.conf" "$CONFIG_DIR/hypr/hyprlock/colors.conf"; do
 	if [ -f "$f" ]; then
 		sed -i "s|/home/[^/]*|$HOME|g" "$f"
 		echo "Ajustado: rutas de usuario en $(basename "$f") -> $HOME"
 	fi
 done
 
-# Permisos de ejecución para todos los scripts propios, estén donde estén
+# Permisos de ejecución para todos los scripts propios
 find "$CONFIG_DIR" -maxdepth 5 -type f -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
 echo "Permisos de ejecución aplicados a los scripts .sh"
 
+# kitty: el theme lo genera matugen -> current-theme.conf (ya incluido)
+# fish: si no es tu shell, el script te lo sugiere al final
+
 echo ""
 echo "=========================================="
-echo " Listo. Backup de tu config anterior en:"
+echo " Instalación completa."
+echo " Backup de tu config anterior en:"
 echo "   $BACKUP_DIR"
 echo ""
 echo " Pasos finales:"
 echo " 1. Poné tus wallpapers en ~/Pictures/wallpapers/"
 echo " 2. Generá los colores por primera vez con:"
 echo "      ~/.config/hypr/hyprland/scripts/wallpaper.sh ~/Pictures/wallpapers/TU-IMAGEN.jpg"
-echo "    (setea el fondo con hyprpaper y recolorea waybar/rofi/fish/nwg-bar/hyprlock/kitty/swaync)"
+echo "    (setea el fondo con hyprpaper y recolorea waybar/rofi/fish/nwg-bar/hyprlock/kitty/swaync/eww/conky)"
 echo " 3. hyprctl reload"
 echo ""
 echo " Si usás fish como shell por defecto y todavía no lo configuraste:"
