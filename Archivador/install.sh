@@ -67,7 +67,6 @@ OFFICIAL_PKGS=(
 	nwg-bar
 	nwg-displays
 	wf-recorder
-	wvkbd
 	hyprpicker
 	hyprshot
 	cliphist
@@ -108,7 +107,9 @@ AUR_PKGS=(
 )
 
 echo "Instalando ${#OFFICIAL_PKGS[@]} paquetes oficiales con pacman..."
+set +e
 $SUDO pacman -S --needed --noconfirm "${OFFICIAL_PKGS[@]}"
+set -e
 
 echo "Instalando ${#AUR_PKGS[@]} paquetes AUR con yay..."
 yay -S --needed --noconfirm "${AUR_PKGS[@]}"
