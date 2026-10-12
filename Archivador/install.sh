@@ -173,6 +173,31 @@ done
 find "$CONFIG_DIR" -maxdepth 5 -type f -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
 echo "Permisos de ejecución aplicados a los scripts .sh"
 
+# --- Cava: usar el sink del sistema (no el mic, no easyeffects) ---
+CAVA_CFG="$CONFIG_DIR/eww/cava_eww.conf"
+if [ -f "$CAVA_CFG" ]; then
+	cat > "$CAVA_CFG" <<'EOF'
+[general]
+framerate = 25
+bars = 18
+[input]
+method = pipewire
+source = @DEFAULT_AUDIO_SINK@
+[output]
+method = raw
+raw_target = /dev/stdout
+data_format = ascii
+ascii_max_range = 7
+EOF
+	echo "Ajustado: cava usa @DEFAULT_AUDIO_SINK@ (audio del sistema)"
+fi
+
+# --- Watchdog de cava: arrancar si no está corriendo ---
+if ! pgrep -f "cava-watchdog.sh" >/dev/null 2>&1; then
+	bash "$CONFIG_DIR/eww/cava-watchdog.sh" >/dev/null 2>&1 &
+	echo "Watchdog de cava iniciado"
+fi
+
 # kitty: el theme lo genera matugen -> current-theme.conf (ya incluido)
 # fish: si no es tu shell, el script te lo sugiere al final
 
