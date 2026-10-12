@@ -176,20 +176,25 @@ echo "Permisos de ejecución aplicados a los scripts .sh"
 # --- Cava: usar el sink del sistema (no el mic, no easyeffects) ---
 CAVA_CFG="$CONFIG_DIR/eww/cava_eww.conf"
 if [ -f "$CAVA_CFG" ]; then
-	cat > "$CAVA_CFG" <<'EOF'
+	# Detectar el sink por defecto de la máquina (cava no entiende @DEFAULT_AUDIO_SINK@)
+	SINK_NAME=$(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep '*' | head -1 | sed 's/.*[0-9]\+\. //' | sed 's/ *\[.*//')
+	if [ -z "$SINK_NAME" ]; then
+		SINK_NAME="alsa_output.pci-0000_00_1f.3.analog-stereo"
+	fi
+	cat > "$CAVA_CFG" <<EOF
 [general]
 framerate = 25
 bars = 18
 [input]
 method = pipewire
-source = @DEFAULT_AUDIO_SINK@
+source = $SINK_NAME
 [output]
 method = raw
 raw_target = /dev/stdout
 data_format = ascii
 ascii_max_range = 7
 EOF
-	echo "Ajustado: cava usa @DEFAULT_AUDIO_SINK@ (audio del sistema)"
+	echo "Ajustado: cava usa el sink '$SINK_NAME' (audio del sistema)"
 fi
 
 # --- Watchdog de cava: arrancar si no está corriendo ---
