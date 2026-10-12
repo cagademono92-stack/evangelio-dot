@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
-cava -p "$HOME/.config/eww/cava_eww.conf" | while read -r line; do
+# Bridge: cava escribe ascii por stdout -> bloques Unicode -> archivo que lee eww.
+#
+# El archivo se escribe de forma atómica (temp + mv) en vez de con `> archivo`.
+# Con `>` el archivo se trunca y se rellena, así que eww podía leer una línea a
+# medio escribir y ver la barra parpadear o desaparecer durante un frame.
+set -uo pipefail
+
+CONF="$HOME/.config/eww/cava_eww.conf"
+OUT="/tmp/eww-cava.txt"
+TMP="/tmp/.eww-cava.$$"
+
+cleanup() { rm -f "$TMP"; }
+trap cleanup EXIT
+
+cava -p "$CONF" | while IFS=';' read -ra vals; do
 	out=""
-	IFS=';' read -ra vals <<< "$line"
 	for v in "${vals[@]}"; do
 		case "$v" in
 			0) out+="▁" ;;
@@ -14,5 +27,5 @@ cava -p "$HOME/.config/eww/cava_eww.conf" | while read -r line; do
 			7) out+="█" ;;
 		esac
 	done
-	printf '%s' "$out" > /tmp/eww-cava.txt
+	printf '%s' "$out" > "$TMP" && mv -f "$TMP" "$OUT"
 done

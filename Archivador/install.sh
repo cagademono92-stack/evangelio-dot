@@ -173,28 +173,32 @@ done
 find "$CONFIG_DIR" -maxdepth 5 -type f -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
 echo "Permisos de ejecución aplicados a los scripts .sh"
 
-# --- Cava: usar el sink del sistema (no el mic, no easyeffects) ---
+# --- Cava: config portable, sin hardcodear el nombre del dispositivo ---
+# No hace falta detectar el sink a mano: con 'source = auto' cava usa el source
+# MONITOR del sink por defecto. Antes este bloque detectaba el sink con wpctl y
+# escribía su nombre tal cual (sin .monitor), que es un nodo de SALIDA: la barra
+# apenas llegaba a 1-2 de 7 y no se veía bien la música. 'auto' además sobrevive
+# a que el usuario cambie de altavoces o auriculares.
 CAVA_CFG="$CONFIG_DIR/eww/cava_eww.conf"
 if [ -f "$CAVA_CFG" ]; then
-	# Detectar el sink por defecto de la máquina (cava no entiende @DEFAULT_AUDIO_SINK@)
-	SINK_NAME=$(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep '*' | head -1 | sed 's/.*[0-9]\+\. //' | sed 's/ *\[.*//')
-	if [ -z "$SINK_NAME" ]; then
-		SINK_NAME="alsa_output.pci-0000_00_1f.3.analog-stereo"
-	fi
-	cat > "$CAVA_CFG" <<EOF
+	cat > "$CAVA_CFG" <<'EOF'
 [general]
-framerate = 25
+framerate = 30
 bars = 18
+autosens = 1
+sensitivity = 100
+gravity = 2
+ignore_volume = 2
 [input]
 method = pipewire
-source = $SINK_NAME
+source = auto
 [output]
 method = raw
 raw_target = /dev/stdout
 data_format = ascii
 ascii_max_range = 7
 EOF
-	echo "Ajustado: cava usa el sink '$SINK_NAME' (audio del sistema)"
+	echo "Ajustado: cava usa source=auto (monitor del sink por defecto)"
 fi
 
 # --- Watchdog de cava: arrancar si no está corriendo ---

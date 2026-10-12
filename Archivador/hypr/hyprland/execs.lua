@@ -39,11 +39,11 @@ hl.on("hyprland.start", function ()
     -- Conky: widget de reloj/sistema generado por matugen
     hl.exec_cmd("conky")
 
-    -- Eww: widget de música (play/pause/next/prev)
-    hl.exec_cmd("eww daemon")
-    hl.exec_cmd("sleep 1 && eww open music")
-    hl.exec_cmd("sleep 1 && eww open clock")
-    hl.exec_cmd("sleep 2 && eww open weather")
+    -- Eww: widget de música (play/pause/next/prev) + visualizador cava.
+    -- Delegar TODO en start.sh: además del daemon y las ventanas, es lo único
+    -- que lanza el puente de cava. Lanzar `eww daemon` / `eww open` a mano
+    -- acá dejaba el visualizador sin procesar (sin /tmp/eww-cava.txt).
+    hl.exec_cmd("$HOME/.config/eww/start.sh")
    -- Necesario para que xdg-desktop-portal (y Discord screen share) funcione en Wayland
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_TYPE=wayland DISPLAY") 
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE DISPLAY PATH")

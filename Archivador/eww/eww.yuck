@@ -20,7 +20,18 @@
 (defpoll title :interval "1s" "playerctl metadata title 2>/dev/null || echo 'Nada sonando'")
 (defpoll artist :interval "1s" "playerctl metadata artist 2>/dev/null || echo ''")
 
-(defpoll cava :interval "80ms" "cat /tmp/eww-cava.txt 2>/dev/null")
+; OJO: usamos defpoll y NO (defvar cava :type "file" ...) a propósito.
+; El soporte de file monitors vía :type/:file/:poll-interval llegó en eww 0.6.0
+; y esta máquina tiene eww 0.5.0, cuyo parser de defvar solo acepta
+; (defvar nombre "valor"). Con :type "file" el reload falla y no levanta el yuck.
+; Cuando actualices eww a >=0.6, esto se puede pasar a:
+;   (defvar cava :type "file" :file "/tmp/eww-cava.txt"
+;     :poll-interval 66 :monitor 0)
+; y así evitar el proceso por poll.
+;
+; El `|| true` evita que el poll salga con error (y ensucie el log con un warning
+; cada 80ms) mientras el bridge todavía no haya escrito el archivo.
+(defpoll cava :interval "80ms" "cat /tmp/eww-cava.txt 2>/dev/null || true")
 
 (defwindow clock
   :monitor 0

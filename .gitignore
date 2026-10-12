@@ -1,0 +1,4 @@
+# Artefactos generados: matugen los escribe en ~/.config/eww/colors.scss
+# desde la plantilla Archivador/matugen/templates/eww-colors.scss.
+# Versionarlo haría que cada cambio de tema ensuciara el repo.
+colors.scss
