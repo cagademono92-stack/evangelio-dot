@@ -43,3 +43,16 @@ output_path = '~/.config/conky/conky.conf'
 [templates.eww]
 input_path = '~/.config/matugen/templates/eww-colors.scss'
 output_path = '~/.config/eww/colors.scss'
+
+# El dock genera el style.css COMPLETO (no es un colors.css aparte): GTK3 no
+# soporta @import en vivo, así que el archivo se regenera entero y el dock se
+# reinicia desde apply-theme.sh.
+[templates.nwgdock]
+input_path = '~/.config/matugen/templates/nwgdock-style.css'
+output_path = '~/.config/nwg-dock-hyprland/style.css'
+
+# El drawer también genera el CSS completo (no un colors.css aparte). GTK3 no
+# soporta @import en vivo, así que el archivo se regenera entero.
+[templates.nwgdrawer]
+input_path = '~/.config/matugen/templates/nwgdrawer-style.css'
+output_path = '~/.config/nwg-drawer/drawer.css'

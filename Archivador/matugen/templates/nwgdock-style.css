@@ -1,0 +1,61 @@
+/* Generado por matugen — NO editar a mano, se sobreescribe con cada wallpaper */
+/* OJO: GTK3 no parsea hex de 8 dígitos (#rrggbbaa), así que todo alfa va con
+   rgba() explícito. matugen expone red/green/blue sueltos justamente para esto. */
+
+/* La ventana real del dock no pinta fondo: el "cristal" lo dibuja #box.
+   Así las ventanas invisibles del hotspot (namespace "hotspot") nunca
+   heredan un rectángulo de color en el borde de la pantalla. */
+window {
+  background: none;
+  border-style: none;
+  box-shadow: none;
+}
+
+/* Ventanas hotspot: 100% invisibles, solo detectan el mouse. */
+#detector-box,
+#hotspot-box {
+  background: none;
+  border-style: none;
+  box-shadow: none;
+}
+
+/* Cristal del dock */
+#box {
+  background-color: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.85);
+  border: 1px solid rgba({{colors.outline.default.red}}, {{colors.outline.default.green}}, {{colors.outline.default.blue}}, 0.33);
+  border-radius: 18px;
+  padding: 6px;
+  margin: 5px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Punto bajo el icono de la ventana activa (estilo macOS) */
+#active {
+  border-bottom: solid 3px;
+  border-color: {{colors.primary.default.hex}};
+  border-radius: 12px;
+}
+
+button,
+image {
+  background: none;
+  border-style: none;
+  box-shadow: none;
+}
+
+button {
+  padding: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 12px;
+  color: {{colors.on_surface.default.hex}};
+  font-size: 12px;
+}
+
+button:hover {
+  background-color: rgba({{colors.on_surface.default.red}}, {{colors.on_surface.default.green}}, {{colors.on_surface.default.blue}}, 0.15);
+}
+
+button:focus {
+  box-shadow: none;
+}

@@ -65,6 +65,8 @@ OFFICIAL_PKGS=(
 	hyprlock
 	hypridle
 	nwg-bar
+	nwg-dock-hyprland
+	nwg-drawer
 	nwg-displays
 	wf-recorder
 	hyprpicker

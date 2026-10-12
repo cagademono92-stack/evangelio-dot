@@ -1,4 +1,18 @@
-# Artefactos generados: matugen los escribe en ~/.config/eww/colors.scss
-# desde la plantilla Archivador/matugen/templates/eww-colors.scss.
-# Versionarlo haría que cada cambio de tema ensuciara el repo.
+# Artefactos generados por matugen: los escribe desde las plantillas de
+# Archivador/matugen/templates/. Versionarlos haría que cada cambio de tema
+# ensuciara el repo, así que va solo la plantilla (la fuente).
+#
+# OJO: las rutas están ancladas con "/" a propósito. Un patrón suelto tipo
+# "style.css" matchearía en cualquier carpeta e ignoraría silenciosamente
+# archivos nuevos como Archivador/waybar/style.css o Archivador/swaync/style.css,
+# que SÍ son fuente y están trackeados.
+
+# eww
 colors.scss
+
+# GTK3 no soporta @import, así que el dock y el drawer generan el CSS completo
+# en vez de un colors.css aparte. Las fuentes son las plantillas:
+#   Archivador/matugen/templates/nwgdock-style.css
+#   Archivador/matugen/templates/nwgdrawer-style.css
+/Archivador/nwg-dock-hyprland/style.css
+/Archivador/nwg-drawer/drawer.css

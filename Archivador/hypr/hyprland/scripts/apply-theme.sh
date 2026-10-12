@@ -9,6 +9,7 @@
 #   - waybar       -> restart
 #   - swaync       -> recarga del CSS (swaync-client --reload-css)
 #   - nwg-bar      -> restart si está abierto
+#   - nwg-dock     -> restart (GTK3 no recarga style.css en caliente)
 #   - hyprland     -> bordes y fondo (hyprctl keyword), leídos de colors.lua
 set -u
 
@@ -47,6 +48,18 @@ if pgrep -x nwg-bar >/dev/null; then
 	pkill -x nwg-bar
 	sleep 0.2
 	nwg-bar & disown
+fi
+
+# --- nwg-dock ----------------------------------------------------------------
+# GTK3 no recarga style.css en caliente, así que se reinicia. Con -d una
+# instancia "residente" no se mata reejecutando el comando: hay que pkill.
+# OJO: -f con anclaje "^" y no -x, porque "nwg-dock-hyprland" supera los 15
+# caracteres de /proc/comm y `pgrep -x` nunca matchearía. El anclaje evita que
+# un `bash -c` que mencione el nombre en su cmdline se mate a sí mismo.
+if pgrep -f '^nwg-dock-hyprland' >/dev/null; then
+	pkill -f '^nwg-dock-hyprland'
+	sleep 0.3
+	nwg-dock-hyprland -d -i 38 -w 10 & disown
 fi
 
 # --- conky --------------------------------------------------------------------
