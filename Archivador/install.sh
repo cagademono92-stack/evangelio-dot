@@ -130,6 +130,15 @@ fi
 
 echo "Carpetas encontradas: ${FOLDERS[*]}"
 
+# ¿El usuario ya tenía un tema de waybar elegido? Hay que saberlo ANTES del
+# backup, porque el bloque de abajo lo restaura después de copiar el del repo.
+# WaybarThemeSwitch.sh escribe su elección en estos dos archivos: style.css (el
+# CSS) y config (el layout).
+PRESERVE_THEME=0
+if [ -f "$CONFIG_DIR/waybar/style.css" ] || [ -f "$CONFIG_DIR/waybar/config" ]; then
+	PRESERVE_THEME=1
+fi
+
 echo ""
 echo "=== 5/6: Backup de tu ~/.config actual ==="
 mkdir -p "$BACKUP_DIR"
@@ -148,6 +157,30 @@ for dir in "${FOLDERS[@]}"; do
 	cp -r "$SCRIPT_DIR/$dir/." "$CONFIG_DIR/$dir/"
 	echo "Copiado: $dir/ -> $CONFIG_DIR/$dir/"
 done
+
+# --- Preservar el tema de waybar que habias elegido ---
+# WaybarThemeSwitch.sh escribe tu elección en ~/.config/waybar/style.css y
+# ~/.config/waybar/config. Como install.sh mueve TODA ~/.config/waybar al
+# backup y después copia la del repo, tu tema se pierde en cada reinstalación
+# y vuelve el que esté commiteado en el repo (que puede ser otro distinto).
+# Si ya tenías un tema elegido, lo restauramos encima del del repo.
+if [ "$PRESERVE_THEME" = "1" ]; then
+	if [ -f "$BACKUP_DIR/waybar/style.css" ] && [ -f "$CONFIG_DIR/waybar/style.css" ]; then
+		cp "$BACKUP_DIR/waybar/style.css" "$CONFIG_DIR/waybar/style.css"
+		# El nombre del tema va en el comentario de cabecera:
+		#   /* [Top] Azulejos — cada módulo es un azulejo... */
+		#   /* [TOP] Matrix Code — barra superior estilo Matrix... */
+		# Tomamos la 2da línea y cortamos en el em-dash. Ojo: un grep -oE
+		# '\[[^]]+\]' NO sirve, porque el nombre contiene espacios y el
+		# corchete cierra justo después del layout ("[Top]"), no del tema.
+		theme_name=$(head -2 "$CONFIG_DIR/waybar/style.css" | tail -1 |
+			sed 's@/\*[[:space:]]*@@; s@[[:space:]]*\*.*@@; s@[[:space:]]*—.*@@')
+		echo "Preservado: tu tema de waybar${theme_name:+ $theme_name}"
+	fi
+	if [ -f "$BACKUP_DIR/waybar/config" ] && [ -f "$CONFIG_DIR/waybar/config" ]; then
+		cp "$BACKUP_DIR/waybar/config" "$CONFIG_DIR/waybar/config"
+	fi
+fi
 
 # --- Arreglos post-copia (automáticos) ---
 
